@@ -1,4 +1,9 @@
-r-tools
-=======
+# r-tools
 
-useful snippets and functions for R
+===================================
+
+Useful snippets and functions for R
+
+- install collections of useful packages
+- load packages, installing if required
+- binary strings
