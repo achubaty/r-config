@@ -11,7 +11,8 @@
     
     hpc <- c("bigmemory", "ff", "Rcpp", "Rdsm", "snowfall")
     
-    # mapping (rgeos) requires `sudo apt-get install libgeos-<version> libgeos-dev libgeos++-dev`
+	# rgdal requires `sudo apt-get install libgdal-dev libgdal1-dev libproj-dev libspatialite-dev`
+    # rgeos requires `sudo apt-get install libgeos-<version> libgeos-dev libgeos++-dev`
     mapping <- c("geoR", "mapdata", "maps", "maptools", "RandomFields", "rgdal", "rgeos",
                  "shapefiles", "sp", "spatstat", "raster")
     
