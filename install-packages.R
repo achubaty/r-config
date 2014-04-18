@@ -25,7 +25,7 @@
     
     plotting <- c("ggplot2", "grid", "manipulate", "RColorBrewer", "scatterplot3d", "vioplot")
     
-    stats.mixed.effects <- c(lme4, nlme)
+    stats.mixed.effects <- c("lme4", "nlme")
     
     stats.other <- c("boot", "CircStats", "effects", "MASS", "survival", "VGAM")
 
