@@ -2,7 +2,7 @@
     chooseCRANmirror()
 
 ### package groups
-    data.manipulation <- c("plyr", "reshape")
+    data.manipulation <- c("data.table", "plyr", "reshape")
     
     # development (devtools) for Windows requires `Rtools` from:
     #   http://cran.r-project.org/bin/windows/Rtools/index.html
