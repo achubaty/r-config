@@ -8,7 +8,7 @@
 #' 
 #' @return Opens a new plot device on the screen.
 #' 
-#' @param ... Additional arguments passed to x11() or windows() 
+#' @param ... Additional arguments passed to quartz(), x11(), or windows().
 #' 
 #' @export
 #' @docType methods
