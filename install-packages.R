@@ -13,8 +13,8 @@
     
 	# rgdal requires `sudo apt-get install libgdal-dev libgdal1-dev libproj-dev libspatialite-dev`
     # rgeos requires `sudo apt-get install libgeos-<version> libgeos-dev libgeos++-dev`
-    mapping <- c("geoR", "mapdata", "maps", "maptools", "RandomFields", "rgdal", "rgeos",
-                 "shapefiles", "sp", "spatstat", "raster")
+    mapping <- c("geoR", "mapdata", "maps", "maptools", "RandomFields", "plotKML", "rgdal", "rgeos",
+                 "shapefiles", "sp", "spatstat", "raster", "rts")
     
     math.tools <- c("deSolve", "popbio")
     
@@ -30,7 +30,12 @@
     
     stats.other <- c("boot", "CircStats", "effects", "MASS", "survival", "VGAM")
 
+    all <- c(data.manipulation, development, hpc, mapping, math.tools, misc,
+             networks, simulation.modelling, plotting, stats.mixed.effects, stats.other)
+    all <- unique(all) # remove duplicate packages
+    
 ### install packages
+    install.packages(all)
     install.packages(data.manipulation)
     install.packages(development)
     install.packages(hpc)
