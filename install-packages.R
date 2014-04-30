@@ -1,6 +1,9 @@
 ### set CRAN mirror
     chooseCRANmirror()
 
+### set default library path
+    .libPaths("path/to/new/library/location")
+    
 ### package groups
     data.manipulation <- c("data.table", "plyr", "reshape")
     
@@ -11,7 +14,7 @@
     
     hpc <- c("bigmemory", "ff", "Rcpp", "Rdsm", "snowfall")
     
-	# rgdal requires `sudo apt-get install libgdal-dev libgdal1-dev libproj-dev libspatialite-dev`
+	  # rgdal requires `sudo apt-get install libgdal-dev libgdal1-dev libproj-dev libspatialite-dev`
     # rgeos requires `sudo apt-get install libgeos-<version> libgeos-dev libgeos++-dev`
     mapping <- c("geoR", "mapdata", "maps", "maptools", "RandomFields", "plotKML", "rgdal", "rgeos",
                  "shapefiles", "sp", "spatstat", "raster", "rts")
