@@ -21,7 +21,7 @@
     
     math.tools <- c("deSolve", "popbio")
     
-    misc <- c("xtable")
+    misc <- c("knitr", "xtable")
     
     networks <- c("igraph", "sna")
     
