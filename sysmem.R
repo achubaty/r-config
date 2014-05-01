@@ -30,7 +30,7 @@ sysmem = function(x="gb") {
   # check OS and determine total RAM
   OS = Sys.info()[["sysname"]] 
   if ((OS=="Darwin") || (OS=="Linux")) {
-    mem <- system("grep MemTotal /proc/meminfo")
+    mem <- system("grep MemTotal /proc/meminfo", intern=TRUE)
     mem <- strsplit(mem, " ")
     mem <- mem[[1]][which(mem[[1]]!="")]
     ram.kb <- as.numeric(mem[2])
