@@ -1,12 +1,11 @@
 ##############################################################
 #' Load, save, and remove .RData objects
 #'
-#' Wrapper functions to \code{\link{load}} and \code{\link{save}} permitting
-#' lists of objects to be loaded/saved at once. By default, \code{.RData} is used.
+#' Wrapper functions to \code{\link{load}}, \code{\link{save}},
+#' and \code{\link{unlink}}, permitting lists of objects to be
+#' loaded/saved/deleted all at once.
 #' 
-#' Also provides wrappers to remove objects from the global environment when no
-#' path specified, or, if path specified, delete their associated data files
-#' but not the objects themselves.
+#' By default, the extension \code{.RData} is used.
 #' 
 #' @param  objects  A character list or character vector of object names
 #' 
@@ -26,20 +25,27 @@
 #'
 # @examples
 # needs examples
-loadObjects <- function(objects, path, extension=".RData") {
-  lapply(objects, function(x) load(file=paste(rdata.path, "/", x, extension, sep=""), env=globalenv()))
+loadObjects <- function(objects, path=NULL, extension=".RData") {
+  if (is.null(path)) {
+    stop("you must specify a valid file path.")
+  } else {
+    lapply(objects, function(x) load(file=paste(rdata.path, "/", x, extension, sep=""), env=globalenv()))
+  }
 }
 
 #' @rdname rdata-Objects-method
-saveObjects <- function(objects, path, extension=".RData") {
-  lapply(objects, function(x) save(list=x, file=paste(path, "/", x, extension, sep="")))
+saveObjects <- function(objects, path=NULL, extension=".RData") {
+  if (is.null(path)) {
+    stop("you must specify a valid file path.")
+  } else {
+    lapply(objects, function(x) save(list=x, file=paste(path, "/", x, extension, sep="")))
+  }
 }
 
 #' @rdname rdata-Objects-method
 rmObjects <- function(objects, path=NULL, extension=".RData") {
   if (is.null(path)) {
-    # only remove object from environment
-    rm(list=objects)
+    stop("you must specify a valid file path.")
   } else {
     # delete the .RData files
     files = lapply(objects, function(x) paste(path, "/", x, extension, sep=""))
