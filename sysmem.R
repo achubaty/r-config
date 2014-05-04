@@ -1,7 +1,7 @@
 ##############################################################
 #' Check system memory
 #'
-#' This is a *very* rough estimate of the **TOTAL** RAM available.
+#' This tells you the **TOTAL** system memory (RAM) available.
 #' Other processes running on the computer will eat into this total,
 #' and as such, you should take these numbers with a grain of salt.
 #' 
@@ -28,11 +28,13 @@ sysmem = function(x="gb") {
   # check OS and determine total RAM
   OS = Sys.info()[["sysname"]] 
   if (OS=="Darwin") {
-    mem <- system("hostinfo | grep memory", intern=TRUE)
-    mem <- strsplit(mem, " ")[[1]][4]
-    ram.gb <- as.numeric(mem)
-    ram.mb <- floor(ram.gb * 1024)
-    ram.kb <- floor(ram.mb * 1024)
+    #mem <- system("hostinfo | grep memory", intern=TRUE)
+    #mem <- as.numeric(strsplit(mem, " ")[[1]][4])
+    mem <- system("sysctl hw.memsize", intern=TRUE)
+    mem <- as.numeric(strsplit(mem, " ")[[1]][2])
+    ram.kb <- mem / 1024
+    ram.mb <- floor(ram.kb / 1024)
+    ram.gb <- floor(ram.mb / 1024)
   } else if (OS=="Linux") {
     mem <- system("grep MemTotal /proc/meminfo", intern=TRUE)
     mem <- strsplit(mem, " ")
