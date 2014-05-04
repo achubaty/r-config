@@ -5,8 +5,6 @@
 #' Other processes running on the computer will eat into this total,
 #' and as such, you should take these numbers with a grain of salt.
 #' 
-#' NOTE: this *should* work on OSX but hasn't been tested yet.
-#' 
 #' @param  x  Units to use for output. One of either "kb", "mb", "gb".
 #' 
 #' @return Total amount of system memory (RAM) in \code{GB}.
@@ -29,7 +27,13 @@ sysmem = function(x="gb") {
   
   # check OS and determine total RAM
   OS = Sys.info()[["sysname"]] 
-  if ((OS=="Darwin") || (OS=="Linux")) {
+  if (OS=="Darwin") {
+    mem <- system("hostinfo | grep memory", intern=TRUE)
+    mem <- strsplit(mem, " ")[[1]][4]
+    ram.gb <- as.numeric(mem)
+    ram.mb <- floor(ram.gb * 1024)
+    ram.kb <- floor(ram.mb * 1024)
+  } else if (OS=="Linux") {
     mem <- system("grep MemTotal /proc/meminfo", intern=TRUE)
     mem <- strsplit(mem, " ")
     mem <- mem[[1]][which(mem[[1]]!="")]
