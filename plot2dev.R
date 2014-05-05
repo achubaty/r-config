@@ -42,11 +42,12 @@ plot2dev = function(x, ...) {
 # @examples
 # needs examples
 newPlot = function(...) {
-  if (Sys.info()[["sysname"]]=="Darwin") {
+  OS = Sys.info()[["sysname"]]
+  if (OS=="Darwin") {
     quartz(...)
-  } else if (Sys.info()[["sysname"]]=="Linux") {
+  } else if (OS=="Linux") {
     x11(...)
-  } else if (Sys.info()[["sysname"]]=="Windows") {
+  } else if (OS=="Windows") {
     windows(...)
   } else {
     x11(...) # try x11() to see if it works
