@@ -28,9 +28,9 @@ checkpoint.save = function(file="checkpoint.RData") {
 }
 
 ### TEST CODE:
-set.seed(0)
-r <- runif(10000)
-checkpoint.save()
-r <- runif(10000)
-checkpoint.load()
-identical(r, runif(10000))
+# set.seed(0)
+# r <- runif(10000)
+# checkpoint.save()
+# r <- runif(10000)
+# checkpoint.load()
+# identical(r, runif(10000))
