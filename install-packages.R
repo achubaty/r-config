@@ -21,20 +21,18 @@
     
     math.tools <- c("deSolve", "popbio")
     
-    misc <- c("knitr", "randem", "xtable")
+    misc <- c("knitr", "random", "xtable")
     
     networks <- c("igraph", "sna")
     
     simulation.modelling <- c("GA", "Pomic")
     
-    plotting <- c("ggplot2", "grid", "manipulate", "RColorBrewer", "scatterplot3d", "vioplot")
+    plotting <- c("ggplot2", "RColorBrewer", "scatterplot3d", "vioplot")
     
-    stats.mixed.effects <- c("lme4", "nlme")
-    
-    stats.other <- c("boot", "CircStats", "effects", "MASS", "survival", "VGAM")
+    stats.other <- c("boot", "CircStats", "effects", "lme4", "VGAM")
 
     all <- c(data.manipulation, development, hpc, mapping, math.tools, misc,
-             networks, simulation.modelling, plotting, stats.mixed.effects, stats.other)
+             networks, simulation.modelling, plotting, stats.other)
     all <- unique(all) # remove duplicate packages
     
 ### install packages
