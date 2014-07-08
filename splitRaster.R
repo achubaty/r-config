@@ -55,7 +55,7 @@ splitRaster = function(x, shape="square", ntiles, ...) {
         
     # for each tile, do the masking:
     for (n in seq_len(ntiles)) {
-        #cropped = crop(x, tile)
+        #newExtent = extent(crop(x, tiles[[n]]))
         masked[[n]] = mask(x, tiles[[n]])
         
         # writeRaster (but will have to make sure its loaded in memory when read later)
