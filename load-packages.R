@@ -29,21 +29,21 @@ setGeneric("load.packages", function(package.list, install, quiet) {
 })
 
 #' @rdname loadpackages-method
-setMethod("load.packages",
-          signature(package.list="list", install="logical", quiet="logical"),
-          definition = function(package.list, install, quiet) {
-            load <- function(name, install) {
-              if (!require(name, character.only=TRUE)) {
-                if (install) {
-                  install.packages(name, repos="http://cran.r-project.org")
-                  library(name, character.only=TRUE)
-                } else {
-                  print(paste("Warning: unable to load package ", name, ". Is it installed?", sep=""))
-                }
+setMethod("loadPackages",
+          signature(packageList="list", install="logical", quiet="logical"),
+          definition = function(packageList, install, quiet) {
+              load <- function(name, install) {
+                  if (!require(name, character.only=TRUE)) {
+                      if (install) {
+                          install.packages(name, repos="http://cran.r-project.org")
+                          library(name, character.only=TRUE)
+                      } else {
+                          warning(paste("Warning: unable to load package ", name, ". Is it installed?", sep=""))
+                      }
+                  }
               }
-            }
-            lapply(package.list, load, install)
-            if (!quiet) print(paste("Loaded", length(package.list), "packages.", sep=" "))
+              lapply(packageList, load, install)
+              if (!quiet) print(paste("Loaded", length(packageList), "packages.", sep=" "))
 })
 
 #' @rdname loadpackages-method
