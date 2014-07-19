@@ -6,6 +6,6 @@ inRange <- function(x, a=0, b=1) {
   if (a>=b) stop("a cannot be greater than b.")
   if (!is.numeric(x)) stop("x must be numeric.")
   if (is.na(x)) return(NA)        # is this desired behaviour?
-  if (is.na(NULL)) return(NULL)   # is this desired behaviour?
+  if (is.null(NULL)) return(NULL)   # is this desired behaviour?
   return((x - a)  *  (b - x) >= 0)
 }
