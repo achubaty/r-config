@@ -27,9 +27,11 @@ plot2dev = function(x, ...) {
 #' Open a new plotting window
 #'
 #' Launch a new graphics device based on operating system used.
-#' Mac OS: open device with \code{quartz()}.
-#' Linux: open device with \code{x11()}.
-#' Windows: open device with \code{windows()}.
+#' - Mac OS: open device with \code{quartz()}.
+#' - Linux: open device with \code{x11()}.
+#' - Windows: open device with \code{windows()}.
+#' 
+#' NOTE: dev.new() would normally be OS-independent but it fails in RStudio.
 #' 
 #' @param ... Additional arguments passed to quartz(), x11(), or windows().
 #' 
@@ -50,7 +52,7 @@ newPlot = function(...) {
   } else if (OS=="Windows") {
     windows(...)
   } else {
-    x11(...) # try x11() to see if it works
-    print("Which operating system are you using?")
+    dev.new(...) # try dev.new() to see if it works
+    warning("Which operating system are you using?")
   }
 }
