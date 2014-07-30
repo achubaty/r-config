@@ -4,7 +4,7 @@
 #' Switch to an existing plot device, or if not already open,
 #' launch a new graphics device based on operating system used.
 #' 
-#' For example, \code{plot2(6)} switches the active plot device to device #6.
+#' For example, \code{dev(6)} switches the active plot device to device #6.
 #' If it doesn't exist, it opens it. NOTE: if devices 1-5 don't exist
 #' they will be opened too.
 #' 
@@ -18,7 +18,7 @@
 #'
 # @examples
 # needs examples
-plot2dev = function(x, ...) {
+dev = function(x, ...) {
   if(is.null(dev.list())) newPlot(...)
   while (dev.set(x)!=x) newPlot(...)
 }
