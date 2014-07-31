@@ -27,7 +27,7 @@
     
     simulation.modelling <- c("GA", "Pomic")
     
-    # Cairo requires: `sudo apt-get install libcairo2-dev`
+    # Cairo requires: `sudo apt-get install libgtk2.0-dev libcairo2-dev xvfb xauth xfonts-base`
     plotting <- c("Cairo", "ggplot2", "RColorBrewer", "scatterplot3d", "vioplot")
     
     stats.other <- c("boot", "CircStats", "effects", "lme4", "VGAM")
