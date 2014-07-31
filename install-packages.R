@@ -14,7 +14,7 @@
     
     hpc <- c("bigmemory", "ff", "Rcpp", "Rdsm", "snowfall")
     
-	  # rgdal requires `sudo apt-get install libgdal-dev libgdal1-dev libproj-dev libspatialite-dev`
+    # rgdal requires `sudo apt-get install libgdal-dev libgdal1-dev libproj-dev libspatialite-dev`
     # rgeos requires `sudo apt-get install libgeos-<version> libgeos-dev libgeos++-dev`
     mapping <- c("geoR", "mapdata", "maps", "maptools", "RandomFields", "plotKML", "rgdal", "rgeos",
                  "shapefiles", "sp", "spatstat", "raster", "rts")
@@ -27,7 +27,8 @@
     
     simulation.modelling <- c("GA", "Pomic")
     
-    plotting <- c("ggplot2", "RColorBrewer", "scatterplot3d", "vioplot")
+    # Cairo requires: `sudo apt-get install libcairo2-dev`
+    plotting <- c("Cairo", "ggplot2", "RColorBrewer", "scatterplot3d", "vioplot")
     
     stats.other <- c("boot", "CircStats", "effects", "lme4", "VGAM")
 
