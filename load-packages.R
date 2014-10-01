@@ -3,27 +3,30 @@
 #'
 #' Load and optionally install additional packages.
 #'
-#' @param package.list    A list of character strings specifying
-#'                        the names of packages to be loaded.
+#' @param packageList A list of character strings specifying
+#' the names of packages to be loaded.
 #'
-#' @param install         Logical flag. If required packages are not
-#'                        already installed, should they be installed?
+#' @param install Logical flag. If required packages are not
+#' already installed, should they be installed?
 #'
-#' @param quiet           Logical flag. Should the final "packages loaded"
-#'                        message be suppressed?
+#' @param quiet Logical flag. Should the final "packages loaded"
+#' message be suppressed?
 #'
 #' @return Nothing is returned. Specified packages are loaded and attached using \code{library()}.
-#' 
+#'
 #' @seealso \code{\link{library}}.
-#' 
+#'
 #' @export
 #' @docType methods
-#' @rdname loadpackages-method
+#' @rdname loadPackages-method
+#'
+#' @author Alex Chubaty
 #'
 #' @examples
 #' \dontrun{pkgs <- list("ggplot2", "lme4")}
-#' \dontrun{load.packages(pkgs) # loads packages if installed}
-#' \dontrun{load.packages(pkgs, install=TRUE) # loads packages after installation (if needed)}
+#' \dontrun{loadPackages(pkgs) # loads packages if installed}
+#' \dontrun{loadPackages(pkgs, install=TRUE) # loads packages after installation (if needed)}
+#'
 setGeneric("loadPackages", function(packageList, install, quiet) {
   standardGeneric("loadPackages")
 })
