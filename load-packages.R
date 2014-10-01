@@ -49,7 +49,7 @@ setMethod("loadPackages",
 #' @rdname loadpackages-method
 setMethod("loadPackages",
           signature(packageList="list", install="missing", quiet="missing"),
-          definition = function(package.list) {
+          definition = function(packageList) {
             load.packages(packageList=packageList, install=FALSE, quiet=FALSE)
 })
 
