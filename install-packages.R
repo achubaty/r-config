@@ -46,7 +46,7 @@
     install.packages(math.tools)
     install.packages(misc)
     install.packages(networks)
-    install.packages(pattern.oriented.modelling)
+    install.packages(simulation.modelling)
     install.packages(plotting); install_github('rCharts', 'ramnathv')
     install.packages(stats.mixed.effects)
     install.packages(stats.other)
