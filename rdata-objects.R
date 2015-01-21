@@ -30,35 +30,28 @@
 # needs examples
 loadObjects <- function(objects, path=NULL, extension=".RData", quiet=TRUE) {
   if (is.null(path)) {
-    stop("you must specify a valid file path.")
-  } else {
-    out = lapply(objects, function(x) {
-            load(file=paste(rdata.path, "/", x, extension, sep=""), env=globalenv())
-          })
-    ifelse(quiet, return(invisible(out)), return(out))
+    path="."
   }
+  out = lapply(objects, function(x) {
+          load(file=paste(path, "/", x, extension, sep=""), env=globalenv())
+        })
+  ifelse(quiet, return(invisible(out)), return(out))
 }
 
 #' @rdname rdata-Objects-method
 saveObjects <- function(objects, path=NULL, extension=".RData", quiet=TRUE) {
-  if (is.null(path)) {
-    stop("you must specify a valid file path.")
-  } else {
-    out = lapply(objects, function(x) {
-            save(list=x, file=paste(path, "/", x, extension, sep=""))
-          })
-    ifelse(quiet, return(invisible(out)), return(out))
-  }
+  if (is.null(path)) path="."
+  out = lapply(objects, function(x) {
+          save(list=x, file=paste(path, "/", x, extension, sep=""))
+        })
+  ifelse(quiet, return(invisible(out)), return(out))
 }
 
 #' @rdname rdata-Objects-method
 rmObjects <- function(objects, path=NULL, extension=".RData", quiet=TRUE) {
-  if (is.null(path)) {
-    stop("you must specify a valid file path.")
-  } else {
-    # delete the .RData files
-    files = lapply(objects, function(x) paste(path, "/", x, extension, sep=""))
-    out = unlink(files)
-    ifelse(quiet, return(invisible(out)), return(out))
-  }
+  if (is.null(path)) path="."
+  # delete the .RData files
+  files = lapply(objects, function(x) paste(path, "/", x, extension, sep=""))
+  out = unlink(files)
+  ifelse(quiet, return(invisible(out)), return(out))
 }
