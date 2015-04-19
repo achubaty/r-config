@@ -38,7 +38,7 @@
     all <- unique(all) # remove duplicate packages
 
 ### install packages
-    install.packages(all); install_github('rCharts', 'ramnathv')
+    install.packages(all); install_github("ramnathv/rCharts")
     install.packages(data.manipulation)
     install.packages(development)
     install.packages(hpc)
@@ -47,11 +47,11 @@
     install.packages(misc)
     install.packages(networks)
     install.packages(simulation.modelling)
-    install.packages(plotting); install_github('rCharts', 'ramnathv')
+    install.packages(plotting); install_github("ramnathv/rCharts")
     install.packages(stats.mixed.effects)
     install.packages(stats.other)
 
 ### install other benchmarking tools
     devtools::install_github("lineprof")
     devtools::install_github("pryr")
-    devtools::install_github("shiny-slickgrid", "wch")
+    devtools::install_github("wch/shiny-slickgrid")
