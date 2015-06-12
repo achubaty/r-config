@@ -7,6 +7,8 @@ binary.string <- function(i, bits.max=NA) {
     b <- 2*a
     sapply(i, function(x) paste(as.integer((x %% b)>=a),collapse=""))
 }
+x <- sample(0:9999, 10000)
+y <- binary.string(x) # length is 14 bits
 
 ### alternate (but slower) conversion to binary string
 if(!require(R.utils)) install.packages("R.utils")
@@ -29,11 +31,9 @@ strtoi(x, base=2)
 ### BENCHMARKING
 library(ggplot2)
 library(microbenchmark)
-x <- sample(0:9999, 10000)
-y <- binary.string(x) # length is 14 bits
 z <- intToBin(x) # length is 14 bits
 
-mb <- microbenchmark(binary.string(x), intToBin(x)times=100)
+mb <- microbenchmark(binary.string(x), intToBin(x), times=100)
 autoplot.microbenchmark(mb)
 
 # can get a slight speedup by precompiling the slower functions
