@@ -1,4 +1,4 @@
-##############################################################
+################################################################################
 #' Load packages.
 #'
 #' Load and optionally install additional packages.
@@ -12,60 +12,55 @@
 #' @param quiet Logical flag. Should the final "packages loaded"
 #' message be suppressed?
 #'
-#' @return Nothing is returned. Specified packages are loaded and attached using \code{library()}.
+#' @return Specified packages are loaded and attached using \code{require()},
+#'         invisibly returning a logical vector of successes.
 #'
-#' @seealso \code{\link{library}}.
-#'
+#' @seealso \code{\link{require}}.
+#' 
 #' @export
 #' @docType methods
-#' @rdname loadPackages-method
+#' @rdname loadPackages
+# @importFrom utils install.packages
 #'
 #' @author Alex Chubaty
 #'
 #' @examples
-#' \dontrun{pkgs <- list("ggplot2", "lme4")}
-#' \dontrun{loadPackages(pkgs) # loads packages if installed}
-#' \dontrun{loadPackages(pkgs, install=TRUE) # loads packages after installation (if needed)}
+#' \dontrun{
+#'   pkgs <- list("ggplot2", "lme4")
+#'   loadPackages(pkgs) # loads packages if installed
+#'   loadPackages(pkgs, install=TRUE) # loads packages after installation (if needed)
+#' }
 #'
-setGeneric("loadPackages", function(packageList, install, quiet) {
+setGeneric("loadPackages", function(packageList, install=FALSE, quiet=TRUE) {
   standardGeneric("loadPackages")
 })
 
-#' @rdname loadpackages-method
+#' @rdname loadPackages
 setMethod("loadPackages",
-          signature(packageList="list", install="logical", quiet="logical"),
-          definition = function(packageList, install, quiet) {
-              load <- function(name, install) {
-                  if (!require(name, character.only=TRUE)) {
-                      if (install) {
-                          install.packages(name, repos="http://cran.r-project.org")
-                          library(name, character.only=TRUE)
-                      } else {
-                          warning(paste("Warning: unable to load package ", name, ". Is it installed?", sep=""))
-                      }
-                  }
+          signature="character",
+          definition=function(packageList, install, quiet) {
+            if (install) {
+              repos <- getOption("repos")
+              if ( is.null(repos) | repos=="") {
+                repos <- "https://cran.rstudio.com"
               }
-              lapply(packageList, load, install)
-              if (!quiet) print(paste("Loaded", length(packageList), "packages.", sep=" "))
+              installed <- unname(installed.packages()[,"Package"])
+              toInstall <- packageList[packageList %in% installed]
+              install.packages(toInstall, repos=repos)
+            }
+            
+            loaded <- sapply(packageList, require, character.only=TRUE)
+            
+            if (!quiet) {
+              message(paste("Loaded", length(which(loaded==TRUE)), "of",
+                            length(packageList), "packages.", sep=" "))
+            }
+            return(invisible(loaded))
 })
 
-#' @rdname loadpackages-method
+#' @rdname loadPackages
 setMethod("loadPackages",
-          signature(packageList="list", install="missing", quiet="missing"),
-          definition = function(packageList) {
-            load.packages(packageList=packageList, install=FALSE, quiet=FALSE)
-})
-
-#' @rdname loadpackages-method
-setMethod("loadPackages",
-          signature(packageList="list", install="missing", quiet="logical"),
-          definition = function(packageList, quiet) {
-            load.packages(packageList=packageList, install=FALSE, quiet=quiet)
-})
-
-#' @rdname loadpackages-method
-setMethod("loadPackages",
-          signature(packageList="list", install="logical", quiet="missing"),
-          definition = function(packageList, install) {
-            load.packages(packageList=packageList, install=install, quiet=FALSE)
+          signature="list",
+          definition=function(packageList, install, quiet) {
+            loadPackages(unlist(packageList), install, quiet)
 })
