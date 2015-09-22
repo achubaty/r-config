@@ -41,7 +41,7 @@ setMethod("loadPackages",
           definition=function(packageList, install, quiet) {
             if (install) {
               repos <- getOption("repos")
-              if ( is.null(repos) | repos=="") {
+              if ( is.null(repos) | any(repos=="") ) {
                 repos <- "https://cran.rstudio.com"
               }
               installed <- unname(installed.packages()[,"Package"])
