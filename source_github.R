@@ -8,6 +8,7 @@
 #'
 #' @param auth   Personal Access Token to use for authorization.
 #'               Required to access files in private repositories.
+#'               See \url{https://help.github.com/articles/creating-an-access-token-for-command-line-use/}.
 #'
 #' @improtFrom base64enc base64decode
 #' @importFrom httr add_headers content GET stop_for_status
