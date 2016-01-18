@@ -10,7 +10,7 @@
     # development (devtools) for Windows requires `Rtools` from:
     #   http://cran.r-project.org/bin/windows/Rtools/index.html
     #   (this is a seperate install of an .exe file)
-    development <- c("devtools", "magrittr", "memoise", "microbenchmark", "rbenchmark","Rcpp", "shiny")
+    development <- c("devtools", "magrittr", "memoise", "microbenchmark", "rbenchmark", "Rcpp", "shiny")
 
     hpc <- c("bigmemory", "ff", "Rcpp", "Rdsm", "snowfall")
 
