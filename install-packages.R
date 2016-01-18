@@ -10,7 +10,8 @@
     # development (devtools) for Windows requires `Rtools` from:
     #   http://cran.r-project.org/bin/windows/Rtools/index.html
     #   (this is a seperate install of an .exe file)
-    development <- c("devtools", "magrittr", "memoise", "microbenchmark", "rbenchmark", "Rcpp", "shiny")
+    development <- c("devtools", "magrittr", "memoise", "microbenchmark", "rbenchmark", "Rcpp",
+                     "shiny", "shinyBS", "shinydashboard")
 
     hpc <- c("bigmemory", "ff", "Rcpp", "Rdsm", "snowfall")
 
@@ -26,7 +27,7 @@
 
     networks <- c("igraph", "sna")
 
-    simulation.modelling <- c("GA", "Pomic")
+    simulation.modelling <- c("GA", "Pomic", "SpaDES")
 
     # Cairo requires: `sudo apt-get install libgtk2.0-dev libcairo2-dev libxt-dev xvfb xauth xfonts-base`
     # Diagrammer requires: `sudo apt-get install libv8-dev`
