@@ -11,7 +11,7 @@
     #   http://cran.r-project.org/bin/windows/Rtools/index.html
     #   (this is a seperate install of an .exe file)
     development <- c("devtools", "magrittr", "memoise", "microbenchmark", "rbenchmark", "Rcpp",
-                     "shiny", "shinyBS", "shinydashboard")
+                     "DT", "shiny", "shinyBS", "shinydashboard")
 
     hpc <- c("bigmemory", "ff", "Rcpp", "Rdsm", "snowfall")
 
