@@ -25,7 +25,7 @@
 
     misc <- c("knitr", "random", "xtable")
 
-    networks <- c("igraph", "sna")
+    networks <- c("ggnetwork", "igraph", "sna")
 
     simulation.modelling <- c("GA", "Pomic", "SpaDES")
 
