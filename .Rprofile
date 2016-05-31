@@ -25,6 +25,9 @@ if (interactive()) {
   .Library.user <- Sys.getenv('R_LIBS_USER')
   .Library.dev  <- "~/R-dev"
 
+  # check for package updates and notify user (but don't install them)
+  if (!is.null(utils::old.packages())) print("Package updates available.")
+
   # load devtools and set dev library
   suppressMessages(require(devtools))
 }
