@@ -11,7 +11,7 @@
     #   http://cran.r-project.org/bin/windows/Rtools/index.html
     #   (this is a seperate install of an .exe file)
     development <- c("devtools", "digest", "future", "magrittr", "memoise",
-                     "microbenchmark", "rbenchmark", "Rcpp", "roxygen2", "rmarkdown", "testthat")
+                     "microbenchmark", "rbenchmark", "Rcpp", "roxygen2", "testthat")
 
     hpc <- c("bigmemory", "ff", "Rcpp", "Rdsm", "snowfall")
 
@@ -23,11 +23,9 @@
 
     math.tools <- c("deSolve", "popbio")
 
-    misc <- c("knitr", "random", "xtable")
-
     networks <- c("ggnetwork", "igraph", "sna")
 
-    simulation.modelling <- c("GA", "Pomic", "SpaDES")
+    simulation.modelling <- c("GA", "Pomic", "random", "SpaDES")
 
     # Cairo requires: `sudo apt-get install libgtk2.0-dev libcairo2-dev libxt-dev xvfb xauth xfonts-base`
     # Diagrammer requires: `sudo apt-get install libv8-dev`
@@ -37,8 +35,10 @@
 
     stats.other <- c("boot", "CircStats", "effects", "lme4", "VGAM")
 
-    all <- c(data.manipulation, development, hpc, mapping, math.tools, misc,
-             networks, shiny.stuff, simulation.modelling, plotting, stats.other)
+    writing <- c("rticles", "knitr", "rmarkdown", "xtable")
+
+    all <- c(data.manipulation, development, hpc, mapping, math.tools, networks,
+             shiny.stuff, simulation.modelling, plotting, stats.other, writing)
     all <- unique(all) # remove duplicate packages
 
 ### install packages
