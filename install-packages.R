@@ -52,13 +52,13 @@
     install.packages(hpc)
     install.packages(mapping); devtools::install_github("s-u/fastshp")
     install.packages(math.tools)
-    install.packages(misc); devtools::install_github("benmarwick/wordcountaddin", type = "source", dependencies = TRUE)
     install.packages(networks)
     install.packages(shiny.stuff)
     install.packages(simulation.modelling)
     install.packages(plotting); install_github("ramnathv/rCharts")
     install.packages(stats.mixed.effects)
     install.packages(stats.other)
+    install.packages(writing); devtools::install_github("benmarwick/wordcountaddin", type = "source", dependencies = TRUE)
 
 ### install other benchmarking tools
     devtools::install_github("profvis")
