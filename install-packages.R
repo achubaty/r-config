@@ -29,7 +29,8 @@
 
     # Cairo requires: `sudo apt-get install libgtk2.0-dev libcairo2-dev libxt-dev xvfb xauth xfonts-base`
     # Diagrammer requires: `sudo apt-get install libv8-dev`
-    plotting <- c("Cairo", "DiagrammeR", "ggplot2", "ggvis", "grid", "RColorBrewer", "scatterplot3d", "vioplot")
+    plotting <- c("Cairo", "DiagrammeR", "ggplot2", "ggvis", "gridBase", "gridExtra",
+                  "RColorBrewer", "scatterplot3d", "vioplot")
 
     shiny.stuff <- c("DT", "shiny", "shinyBS", "shinydashboard", "shinyjs")
 
