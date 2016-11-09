@@ -10,8 +10,8 @@
     # development (devtools) for Windows requires `Rtools` from:
     #   http://cran.r-project.org/bin/windows/Rtools/index.html
     #   (this is a seperate install of an .exe file)
-    development <- c("devtools", "magrittr", "memoise", "microbenchmark", "rbenchmark", "Rcpp",
-                     "DT", "shiny", "shinyBS", "shinydashboard")
+    development <- c("devtools", "digest", "future", "magrittr", "memoise",
+                     "microbenchmark", "rbenchmark", "Rcpp", "roxygen2", "rmarkdown", "testthat")
 
     hpc <- c("bigmemory", "ff", "Rcpp", "Rdsm", "snowfall")
 
@@ -31,29 +31,36 @@
 
     # Cairo requires: `sudo apt-get install libgtk2.0-dev libcairo2-dev libxt-dev xvfb xauth xfonts-base`
     # Diagrammer requires: `sudo apt-get install libv8-dev`
-    plotting <- c("Cairo", "DiagrammeR", "ggplot2", "ggvis", "RColorBrewer", "scatterplot3d", "vioplot") # need to install `rCharts` from github
+    plotting <- c("Cairo", "DiagrammeR", "ggplot2", "ggvis", "grid", "RColorBrewer", "scatterplot3d", "vioplot")
+
+    shiny.stuff <- c("DT", "shiny", "shinyBS", "shinydashboard", "shinyjs")
 
     stats.other <- c("boot", "CircStats", "effects", "lme4", "VGAM")
 
     all <- c(data.manipulation, development, hpc, mapping, math.tools, misc,
-             networks, simulation.modelling, plotting, stats.other)
+             networks, shiny.stuff, simulation.modelling, plotting, stats.other)
     all <- unique(all) # remove duplicate packages
 
 ### install packages
-    install.packages(all); install_github("ramnathv/rCharts")
+    install.packages(all);
+      install_github("ramnathv/rCharts");
+      devtools::install_github("s-u/fastshp");
+      devtools::install_github("benmarwick/wordcountaddin", type = "source", dependencies = TRUE)
+
     install.packages(data.manipulation)
     install.packages(development)
     install.packages(hpc)
-    install.packages(mapping)
+    install.packages(mapping); devtools::install_github("s-u/fastshp")
     install.packages(math.tools)
-    install.packages(misc)
+    install.packages(misc); devtools::install_github("benmarwick/wordcountaddin", type = "source", dependencies = TRUE)
     install.packages(networks)
+    install.packages(shiny.stuff)
     install.packages(simulation.modelling)
     install.packages(plotting); install_github("ramnathv/rCharts")
     install.packages(stats.mixed.effects)
     install.packages(stats.other)
 
 ### install other benchmarking tools
-    devtools::install_github("lineprof")
+    devtools::install_github("profvis")
     devtools::install_github("pryr")
     devtools::install_github("wch/shiny-slickgrid")
