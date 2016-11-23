@@ -26,7 +26,9 @@ The advantages here are that packages installed for each project are kept separa
 (Although [`packrat`](https://rstudio.github.io/packrat/) is also good for maintaining separate package libraries per project, it doesn't ensure system dependency separation.)
 
 Please note that this guide is intended only to get you started with using R with Docker, not to be a full tutorial for more advanced Docker use.
-See the offical [Docker documentation](https://docs.docker.com/) and the [rocker project](https://github.com/rocker-org/rocker) for more advanced usage, including using containers with Rstudio Server installed or using a virtual X server.
+See the offical [Docker documentation](https://docs.docker.com/) and the [rocker project](https://github.com/rocker-org/rocker) for more advanced usage, including using containers with Rstudio Server installed[^1] or using a virtual X server.
+
+[^1]: https://github.com/rocker-org/rocker-versioned
 
 ## Older R versions
 
