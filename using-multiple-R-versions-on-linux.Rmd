@@ -1,7 +1,7 @@
 ---
 title: "Using multiple R versions on Linux"
 author: "Alex M. Chubaty"
-date: "November 23, 2016"
+date: "December 6, 2016"
 output: 
   pdf_document: 
     highlight: pygments
@@ -281,14 +281,17 @@ As noted above, using Docker is likely a better solution, as this approach doesn
     svn update
     bash ./tools/rsync-recommended
     bash ./tools/link-recommended
-    bash build-R-devel.sh
+    
+    # rebuild
+    cd  ~/R/bin
+    bash ./build-R-devel.sh
     
     # make and install
     cd ~/R/src/R-devel-build
     sudo make install
     
     # update R packages
-    update.packages(ask = FALSE, lib = .Library.site[1])
+    Rscript-devel -e 'update.packages(ask = FALSE, lib.loc = .Library.site[1])'
     ```
 
     Be sure to give the script execute permissions:
