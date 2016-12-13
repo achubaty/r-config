@@ -207,7 +207,7 @@ As noted above, using Docker is likely a better solution, as this approach doesn
         --with-lapack                               \
         --with-readline                             \
         --with-recommended-packages                 \
-        --program-suffix=dev
+        --program-suffix=devel
     
     make 
     
