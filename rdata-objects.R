@@ -1,4 +1,3 @@
-##############################################################
 #' Load, save, and remove .RData objects
 #'
 #' Wrapper functions to \code{\link{load}}, \code{\link{save}},
@@ -13,7 +12,7 @@
 #'                  from which to load the objects. The path should be
 #'                  constructed using \code{\link{file.path}}.
 #' 
-#' @param  extension  The file extension to use (default is \code{.RData}).
+#' @param  ext      The file extension to use (default is \code{.RData}).
 #' 
 #' @param  quiet    Logical. Should output be suppressed? Default is \code{TRUE}.
 #' 
@@ -28,30 +27,38 @@
 #'
 # @examples
 # needs examples
-loadObjects <- function(objects, path=NULL, extension=".RData", quiet=TRUE) {
-  if (is.null(path)) {
-    path="."
-  }
-  out = lapply(objects, function(x) {
-          load(file=paste(path, "/", x, extension, sep=""), env=globalenv())
-        })
+loadObjects <- function(objects, path = NULL, ext = ".RData", quiet = TRUE) {
+  if (is.null(path)) path <- "."
+  out <- lapply(objects, function(x) {
+    load(file = file.path(path, paste0(x, ext)), env = .GlobalEnv)
+    
+    ## if object is a raster, resave then reload it to make sure the x@file@name is correct
+    if (is(get(x, envir = .GlobalEnv), "Raster")) {
+      f <- slot(slot(get(x, envir = .GlobalEnv), "file"), "name")
+      f <- gsub("\\\\", "/", f)
+      r <- raster(file.path(path, basename(f)))
+      save(r, file = file.path(path, paste0(x, ext)))
+      r
+    }
+  })
   ifelse(quiet, return(invisible(out)), return(out))
 }
 
 #' @rdname rdata-Objects-method
-saveObjects <- function(objects, path=NULL, extension=".RData", quiet=TRUE) {
-  if (is.null(path)) path="."
-  out = lapply(objects, function(x) {
-          save(list=x, file=paste(path, "/", x, extension, sep=""))
-        })
+saveObjects <- function(objects, path = NULL, ext = ".RData", quiet = TRUE) {
+  if (is.null(path)) path <- "."
+  out <- lapply(objects, function(x) {
+    save(list = x, file = file.path(path, paste0(x, ext)))
+  })
   ifelse(quiet, return(invisible(out)), return(out))
 }
 
 #' @rdname rdata-Objects-method
-rmObjects <- function(objects, path=NULL, extension=".RData", quiet=TRUE) {
-  if (is.null(path)) path="."
+rmObjects <- function(objects, path = NULL, ext = ".RData", quiet = TRUE) {
+  if (is.null(path)) path <- "."
+  
   # delete the .RData files
-  files = lapply(objects, function(x) paste(path, "/", x, extension, sep=""))
-  out = unlink(files)
+  files <- lapply(objects, function(x) file.path(path, paste0(x, ext)))
+  out <- unlink(files)
   ifelse(quiet, return(invisible(out)), return(out))
 }
