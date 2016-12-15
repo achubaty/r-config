@@ -36,7 +36,13 @@ loadObjects <- function(objects, path = NULL, ext = ".RData", quiet = TRUE) {
     if (is(get(x, envir = .GlobalEnv), "Raster")) {
       f <- slot(slot(get(x, envir = .GlobalEnv), "file"), "name")
       f <- gsub("\\\\", "/", f)
-      r <- raster(file.path(path, basename(f)))
+      r <- if (is(get(x, envir = .GlobalEnv), "RasterLayer")) {
+        raster(file.path(path, basename(f)))
+      } else if (is(get(x, envir = .GlobalEnv), "RasterStack")) {
+        stack(file.path(path, basename(f)))
+      } else if (is(get(x, envir = .GlobalEnv), "RasterBrick")) {
+        brick(file.path(path, basename(f)))
+      }
       save(r, file = file.path(path, paste0(x, ext)))
       r
     }
