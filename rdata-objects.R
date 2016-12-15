@@ -34,7 +34,7 @@ loadObjects <- function(objects, path = NULL, ext = ".RData", quiet = TRUE) {
     
     ## if object is a raster, resave then reload it to make sure the x@file@name is correct
     if (is(get(x, envir = .GlobalEnv), "Raster")) {
-      f <- slot(slot(get(x, envir = .GlobalEnv), "file"), "name")
+      f <- filename(get(x, envir = .GlobalEnv))
       f <- gsub("\\\\", "/", f)
       r <- if (is(get(x, envir = .GlobalEnv), "RasterLayer")) {
         raster(file.path(path, basename(f)))
