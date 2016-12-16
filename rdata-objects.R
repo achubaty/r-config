@@ -28,25 +28,34 @@
 # @examples
 # needs examples
 loadObjects <- function(objects, path = NULL, ext = ".RData", quiet = TRUE) {
-  if (is.null(path)) path <- "."
+  if (is.null(path)) {
+    path <- "."
+  } else if (!dir.exists(path)) {
+    stop(paste("Path", path, "does to exist."))
+  }
   out <- lapply(objects, function(x) {
     load(file = file.path(path, paste0(x, ext)), env = .GlobalEnv)
     
     ## if object is a raster, resave then reload it to make sure the x@file@name is correct
     if (is(get(x, envir = .GlobalEnv), "Raster")) {
-      f <- filename(get(x, envir = .GlobalEnv))
-      f <- gsub("\\\\", "/", f)
-      r <- if (is(get(x, envir = .GlobalEnv), "RasterLayer")) {
-        raster(file.path(path, basename(f)))
-      } else if (is(get(x, envir = .GlobalEnv), "RasterStack")) {
-        stack(file.path(path, basename(f)))
-      } else if (is(get(x, envir = .GlobalEnv), "RasterBrick")) {
-        brick(file.path(path, basename(f)))
+      f <- filename(get(x, envir = .GlobalEnv)) %>% gsub("\\\\", "/", .)
+      
+      ## ensure rasters backed by files use the correct path for the current machine
+      if (nzchar(f)) {
+        r <- if (is(get(x, envir = .GlobalEnv), "RasterLayer")) {
+          raster(file.path(path, basename(f)))
+        } else if (is(get(x, envir = .GlobalEnv), "RasterStack")) {
+          stack(file.path(path, basename(f)))
+        } else if (is(get(x, envir = .GlobalEnv), "RasterBrick")) {
+          brick(file.path(path, basename(f)))
+        }
+        save(r, file = file.path(path, paste0(x, ext)))
+        assign(x, r, envir = .GlobalEnv)
+        invisible(x) ## return character of object name, per '?load'
       }
-      save(r, file = file.path(path, paste0(x, ext)))
-      r
     }
   })
+  
   ifelse(quiet, return(invisible(out)), return(out))
 }
 
