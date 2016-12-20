@@ -50,7 +50,7 @@ loadObjects <- function(objects, path = NULL, ext = ".RData", quiet = TRUE) {
           brick(file.path(path, basename(f)))
         }
         assign(x, r, envir = .GlobalEnv)
-        save(x, file = file.path(path, paste0(x, ext)))
+        save(list = x, file = file.path(path, paste0(x, ext)))
         invisible(x) ## return character of object name, per '?load'
       }
     }
