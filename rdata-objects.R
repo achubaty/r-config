@@ -49,8 +49,8 @@ loadObjects <- function(objects, path = NULL, ext = ".RData", quiet = TRUE) {
         } else if (is(get(x, envir = .GlobalEnv), "RasterBrick")) {
           brick(file.path(path, basename(f)))
         }
-        save(r, file = file.path(path, paste0(x, ext)))
         assign(x, r, envir = .GlobalEnv)
+        save(x, file = file.path(path, paste0(x, ext)))
         invisible(x) ## return character of object name, per '?load'
       }
     }
