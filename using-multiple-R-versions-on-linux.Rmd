@@ -265,7 +265,7 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 
     ```bash
     sudo ln -s ~/R/bin/R-devel.sh /usr/local/bin/R-devel
-    sudo ln -s ~/R/bin/R-devel.sh /usr/local/bin/Rscript-devel
+    sudo ln -s ~/R/bin/Rscript-devel.sh /usr/local/bin/Rscript-devel
     ```
 
 11. Create a script used to update R-devel in `~/R/bin/update-R-devel.sh`:
