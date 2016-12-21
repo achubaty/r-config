@@ -291,7 +291,9 @@ As noted above, using Docker is likely a better solution, as this approach doesn
     sudo make install
     
     # update R packages
+    echo "*** Installation complete. Updating R packages..."
     Rscript-devel -e 'update.packages(ask = FALSE, lib.loc = .Library.site[1])'
+    echo "*** Done."
     ```
 
     Be sure to give the script execute permissions:
