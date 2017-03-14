@@ -31,36 +31,36 @@
 #'   loadPackages(pkgs, install=TRUE) # loads packages after installation (if needed)
 #' }
 #'
-setGeneric("loadPackages", function(packageList, install=FALSE, quiet=TRUE) {
+setGeneric("loadPackages", function(packageList, install = FALSE, quiet = TRUE) {
   standardGeneric("loadPackages")
 })
 
 #' @rdname loadPackages
 setMethod("loadPackages",
-          signature="character",
-          definition=function(packageList, install, quiet) {
+          signature = "character",
+          definition = function(packageList, install, quiet) {
             if (install) {
               repos <- getOption("repos")
-              if ( is.null(repos) | any(repos=="") ) {
+              if ( is.null(repos) || any(repos == "") ) {
                 repos <- "https://cran.rstudio.com"
               }
               installed <- unname(installed.packages()[,"Package"])
               toInstall <- packageList[packageList %in% installed]
-              install.packages(toInstall, repos=repos)
+              install.packages(toInstall, repos = repos)
             }
             
-            loaded <- sapply(packageList, require, character.only=TRUE)
+            loaded <- sapply(packageList, require, character.only = TRUE)
             
             if (!quiet) {
-              message(paste("Loaded", length(which(loaded==TRUE)), "of",
-                            length(packageList), "packages.", sep=" "))
+              message(paste("Loaded", length(which(loaded == TRUE)), "of",
+                            length(packageList), "packages.", sep = " "))
             }
             return(invisible(loaded))
 })
 
 #' @rdname loadPackages
 setMethod("loadPackages",
-          signature="list",
-          definition=function(packageList, install, quiet) {
+          signature = "list",
+          definition = function(packageList, install, quiet) {
             loadPackages(unlist(packageList), install, quiet)
 })
