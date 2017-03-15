@@ -1,9 +1,10 @@
 # r-tools
 
-Useful snippets and functions for `R`
+Useful snippets for `R`.
 
-To use a particular set of functions (e.g., `rndstr.R`), use 
+All functions moved to my [`amc`](https://github.com/achubaty/amc) package, which can be installed using:
 
-    devtools::source_url("https://raw.githubusercontent.com/achubaty/r-tools/master/rndstr.R")
+```r
+devtools::install_github("achubaty/amc")
+```
 
-(Alternatively, clone the repo and use the files locally on your system.)
