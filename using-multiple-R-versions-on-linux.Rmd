@@ -1,7 +1,7 @@
 ---
 title: "Using multiple R versions on Linux"
 author: "Alex M. Chubaty"
-date: "December 6, 2016"
+date: "26 September 2017"
 output: 
   pdf_document: 
     highlight: pygments
@@ -90,15 +90,16 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 
     ```bash
     cd ~/R/src/
-    wget https://cran.r-project.org/src/base/R-3/R-3.2.2.tar.gz
-    tar -xvzf R-3.2.2.tar.gz
+    R_VERSION=3.2.2
+    wget https://cran.r-project.org/src/base/R-3/R-${R_VERSION}.tar.gz
+    tar -xvzf R-${R_VERSION}.tar.gz
     ```
 
 4. Install:
 
     ```bash
-    cd ~/R/src/R-3.2.2
-    ./configure --prefix=/usr/local/lib/R-3.2.2 --enable-R-shlib --with-blas --with-lapack
+    cd ~/R/src/R-${R_VERSION}
+    ./configure --prefix=/usr/local/lib/R-${R_VERSION} --enable-R-shlib --with-blas --with-lapack
     make
     sudo make install
     ```
@@ -106,7 +107,7 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 5. Create symlink:
 
     ```bash
-    sudo ln -s /usr/local/lib/R-3.2.2/bin/R /usr/local/bin/R-3.2.2
+    sudo ln -s /usr/local/lib/R-${R_VERSION}/bin/R /usr/local/bin/R-${R_VERSION}
     ```
 
 6. Run a specific R version:
@@ -114,7 +115,7 @@ As noted above, using Docker is likely a better solution, as this approach doesn
     From the commandline, simply do:
     
     ```bash
-    R-3.2.2
+    R-${R_VERSION}
     ```
 
 ## R-devel
@@ -234,11 +235,13 @@ As noted above, using Docker is likely a better solution, as this approach doesn
     ```bash
     ## ~/R/bin/R-devel.sh
     #!/bin/bash
-    export R_LIBS_SITE=${R_LIBS_SITE-'/usr/local/lib/R-devel/lib/R/library:/usr/local/lib/R/site-library:/usr/lib/R/site-library'}
+    export R_LIBS_SITE=${R_LIBS_SITE-'/usr/local/lib/R-devel/lib/R/library'}
     export PATH="/usr/local/lib/R-devel/bin:$PATH"
     R "$@"
     ```
 
+    Note that this keeps the R-devel package library separate from your regular R libraries.
+    
     Be sure to give the script execute permissions:
     
     ```bash
@@ -250,11 +253,13 @@ As noted above, using Docker is likely a better solution, as this approach doesn
     ```bash
     ## ~/R/bin/Rscript-devel.sh
     #!/bin/bash
-    export R_LIBS_SITE=${R_LIBS_SITE-'/usr/local/lib/R-devel/lib/R/library:/usr/local/lib/R/site-library:/usr/lib/R/site-library'}
+    export R_LIBS_SITE=${R_LIBS_SITE-'/usr/local/lib/R-devel/lib/R/library'}
     export PATH="/usr/local/lib/R-devel/bin:$PATH"
     Rscript "$@"
     ```
 
+    Note that this keeps the R-devel package library separate from your regular R libraries.
+    
     Be sure to give the script execute permissions:
     
     ```bash
