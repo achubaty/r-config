@@ -90,16 +90,16 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 
     ```bash
     cd ~/R/src/
-    R_VERSION=3.2.2
-    wget https://cran.r-project.org/src/base/R-3/R-${R_VERSION}.tar.gz
-    tar -xvzf R-${R_VERSION}.tar.gz
+    RVERSION=3.2.5
+    wget https://cran.r-project.org/src/base/R-3/R-${RVERSION}.tar.gz
+    tar -xvzf R-${RVERSION}.tar.gz
     ```
 
 4. Install:
 
     ```bash
-    cd ~/R/src/R-${R_VERSION}
-    ./configure --prefix=/usr/local/lib/R-${R_VERSION} --enable-R-shlib --with-blas --with-lapack
+    cd ~/R/src/R-${RVERSION}
+    ./configure --prefix=/usr/local/lib/R-${RVERSION} --enable-R-shlib --with-blas --with-lapack
     make
     sudo make install
     ```
@@ -107,15 +107,15 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 5. Create symlink:
 
     ```bash
-    sudo ln -s /usr/local/lib/R-${R_VERSION}/bin/R /usr/local/bin/R-${R_VERSION}
+    sudo ln -s /usr/local/lib/R-${RVERSION}/bin/R /usr/local/bin/R-${RVERSION}
     ```
 
 6. Run a specific R version:
 
-    From the commandline, simply do:
+    From the commandline, simply do (according to `${RVERSION}`):
     
     ```bash
-    R-${R_VERSION}
+    R-3.2.5
     ```
 
 ## R-devel
