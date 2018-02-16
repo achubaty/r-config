@@ -51,7 +51,7 @@ See the offical [Docker documentation](https://docs.docker.com/) and the [rocker
 
 ## R-devel
 
-1. Install Docker following the instructions [here](https://docs.docker.com/engine/installation/).
+1. Install Docker following the instructions [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
 2. Download the latest R-devel image:
 
     ```bash
@@ -77,7 +77,7 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 1. Install prerequisites for building R from source:
 
     ```bash
-    sudo apt-get build-dep r-base
+    sudo apt build-dep r-base
     ```
 
 2. Create directories to keep the R source code:
@@ -123,15 +123,14 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 1. Install prerequisites for building R from source:
 
     ```bash
-    sudo apt-get build-dep r-base
-    sudo apt-get install subversion ccache xorg-dev
+    sudo apt build-dep r-base
+    sudo apt install ccache subversion xorg-dev
     ```
 
 2. Create directories to keep the R-devel source code and to `make` it:
 
     ```bash
-    mkdir ~/R/src
-    mkdir ~/R/src/R-devel-build
+    mkdir -p ~/R/src/R-devel-build
     ```
 
 3. Get the latest version of R-devel from the subversion repository:
