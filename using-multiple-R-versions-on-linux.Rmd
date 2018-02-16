@@ -1,7 +1,7 @@
 ---
 title: "Using multiple R versions on Linux"
 author: "Alex M. Chubaty"
-date: "26 September 2017"
+date: "16 February 2018"
 output: 
   pdf_document: 
     highlight: pygments
@@ -296,6 +296,7 @@ As noted above, using Docker is likely a better solution, as this approach doesn
     
     # update R packages
     echo "*** Installation complete. Updating R packages..."
+    Rscript-devel -e 'install.packages("lattice", lib.loc = .Library.site[1])'
     Rscript-devel -e 'update.packages(ask = FALSE, lib.loc = .Library.site[1])'
     echo "*** Done."
     ```
@@ -323,4 +324,3 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 - http://singmann.org/installing-r-devel-on-linux/
 - https://hub.docker.com/r/rocker/drd/~/dockerfile/
 - https://support.rstudio.com/hc/en-us/articles/218004217-Building-R-from-source
-
