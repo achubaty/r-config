@@ -199,7 +199,7 @@ As noted above, using Docker is likely a better solution, as this approach doesn
     CXXFLAGS="-ggdb -pipe -Wall -pedantic"          \
     FC="ccache gfortran"                            \
     F77="ccache gfortran"                           \
-    MAKE="make -j4"                                 \
+    MAKE="make"                                     \
     ../r-devel/R/configure                          \
         --prefix=/usr/local/lib/R-devel             \
         --enable-R-shlib                            \
