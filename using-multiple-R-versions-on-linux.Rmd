@@ -1,15 +1,17 @@
 ---
 title: "Using multiple R versions on Linux"
 author: "Alex M. Chubaty"
-date: "16 February 2018"
+date: "15 June 2018"
 output: 
   pdf_document: 
     highlight: pygments
     toc: yes
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 Unlike on Windows, most R users on linux tend to work with a single version of R -- whichever version is available in their software repositories.
@@ -130,7 +132,8 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 2. Create directories to keep the R-devel source code and to `make` it:
 
     ```bash
-    mkdir -p ~/R/src/R-devel-build
+    mkdir -p ~/R
+    ln -s ~/GitHub/r-config/R-devel/src ~/R/src
     ```
 
 3. Get the latest version of R-devel from the subversion repository:
@@ -148,95 +151,31 @@ As noted above, using Docker is likely a better solution, as this approach doesn
     bash ./tools/link-recommended
     ```
 
-5. Create the installation script in `~/R/bin/build-R-devel.sh`:
+5. Use the installation script in `R-devel/scripts/build-R-devel.sh`:
 
-    ```bash
-    ## ~/R/bin/build-R-devel.sh
-    #!/bin/sh
-    cd ~/R/src/R-devel-build
-    # R_PAPERSIZE=letter                        \
-    # R_BATCHSAVE="--no-save --no-restore"      \
-    # R_BROWSER=xdg-open                        \
-    # PAGER=/usr/bin/pager                      \
-    # PERL=/usr/bin/perl                        \
-    # R_UNZIPCMD=/usr/bin/unzip                 \
-    # R_ZIPCMD=/usr/bin/zip                     \
-    # R_PRINTCMD=/usr/bin/lpr                   \
-    # LIBnn=lib                                 \
-    # AWK=/usr/bin/awk                          \
-    # CC="ccache gcc"                           \
-    # CFLAGS="-ggdb -pipe -std=gnu99 -Wall -pedantic -DTESTING_WRITE_BARRIER" \
-    # CXX="ccache g++"                          \
-    # CXXFLAGS="-ggdb -std=c++0x -pipe -Wall -pedantic" \
-    # FC="ccache gfortran"                      \
-    # FCFLAGS="-ggdb -pipe -Wall -pedantic"     \
-    # F77="ccache gfortran"                     \
-    # FFLAGS="-ggdb -pipe -Wall -pedantic"      \
-    # MAKE="make -j4"                           \
-    # ./configure                               \
-    #     --prefix=/usr/local/lib/R-devel       \
-    #     --enable-R-shlib                      \
-    #     --enable-strict-barrier               \
-    #     --with-blas                           \
-    #     --with-lapack                         \
-    #     --with-readline                       \
-    #     --with-recommended-packages           \
-    #     --program-suffix=dev
-    
-    R_PAPERSIZE=letter                              \
-    R_BATCHSAVE="--no-save --no-restore"            \
-    R_BROWSER=xdg-open                              \
-    PAGER=/usr/bin/pager                            \
-    PERL=/usr/bin/perl                              \
-    R_UNZIPCMD=/usr/bin/unzip                       \
-    R_ZIPCMD=/usr/bin/zip                           \
-    R_PRINTCMD=/usr/bin/lpr                         \
-    LIBnn=lib                                       \
-    AWK=/usr/bin/awk                                \
-    CC="ccache gcc"                                 \
-    CFLAGS="-ggdb -pipe -std=gnu99 -Wall -pedantic" \
-    CXX="ccache g++"                                \
-    CXXFLAGS="-ggdb -pipe -Wall -pedantic"          \
-    FC="ccache gfortran"                            \
-    F77="ccache gfortran"                           \
-    MAKE="make"                                     \
-    ../r-devel/R/configure                          \
-        --prefix=/usr/local/lib/R-devel             \
-        --enable-R-shlib                            \
-        --with-blas                                 \
-        --with-lapack                               \
-        --with-readline                             \
-        --with-recommended-packages                 \
-        --program-suffix=devel
-    
-    make 
-    
-    echo "*** Done -- now run 'make install'"
+    ```{r comment=''}
+    cat(readLines("R-devel/scripts/build-R-devel.sh"), sep = '\n')
     ```
 
 6. Give the script execute permissions:
 
     ```bash
-    chmod a+x ~/R/bin/build-R-devel.sh
+    chmod a+x ~/GitHub/r-config/R-devel/scripts/build-R-devel.sh
     ```
 
 7. Make and install R-devel:
 
     ```bash
-    bash ~/R/bin/build-R-devel.sh
+    bash ~/GitHub/r-config/R-devel/scripts/build-R-devel.sh
     
     cd ~/R/src/R-devel-build
     sudo make install
     ```
 
-8. Create custom script to launch R-devel in `~/R/bin/R-devel.sh`:
+8. Create custom script to launch R-devel in `R-devel/scripts/R-devel.sh`:
 
-    ```bash
-    ## ~/R/bin/R-devel.sh
-    #!/bin/bash
-    export R_LIBS_SITE=${R_LIBS_SITE-'/usr/local/lib/R-devel/lib/R/library'}
-    export PATH="/usr/local/lib/R-devel/bin:$PATH"
-    R "$@"
+    ```{r comment=''}
+    cat(readLines("R-devel/scripts/R-devel.sh"), sep = '\n')
     ```
 
     Note that this keeps the R-devel package library separate from your regular R libraries.
@@ -244,67 +183,43 @@ As noted above, using Docker is likely a better solution, as this approach doesn
     Be sure to give the script execute permissions:
     
     ```bash
-    chmod a+x ~/R/bin/R-devel.sh
+    chmod a+x ~/GitHub/r-config/R-devel/scripts/R-devel.sh
     ```
 
-9. Create custom script to launch Rscript-devel in `~/R/bin/Rscript-devel.sh`:
+9. Create custom script to launch Rscript-devel in `R-devel/scripts/Rscript-devel.sh`:
 
-    ```bash
-    ## ~/R/bin/Rscript-devel.sh
-    #!/bin/bash
-    export R_LIBS_SITE=${R_LIBS_SITE-'/usr/local/lib/R-devel/lib/R/library'}
-    export PATH="/usr/local/lib/R-devel/bin:$PATH"
-    Rscript "$@"
+    ```{r comment=''}
+    cat(readLines("R-devel/scripts/Rscript-devel.sh"), sep = '\n')
     ```
+
 
     Note that this keeps the R-devel package library separate from your regular R libraries.
     
     Be sure to give the script execute permissions:
     
     ```bash
-    chmod a+x ~/R/bin/Rscript-devel.sh
+    chmod a+x ~/GitHub/r-config/R-devel/scripts/Rscript-devel.sh
     ```
 
 10. Create symlinks to launch R-devel and Rscript-devel:
 
     ```bash
-    sudo ln -s ~/R/bin/R-devel.sh /usr/local/bin/R-devel
-    sudo ln -s ~/R/bin/Rscript-devel.sh /usr/local/bin/Rscript-devel
+    sudo ln -s ~/GitHub/r-config/R-devel/scripts/R-devel.sh /usr/local/bin/R-devel
+    sudo ln -s ~/GitHub/r-config/R-devel/scripts/Rscript-devel.sh /usr/local/bin/Rscript-devel
     ```
 
-11. Create a script used to update R-devel in `~/R/bin/update-R-devel.sh`:
+11. Create a script used to update R-devel in `R-devel/scripts/update-R-devel.sh`:
 
     This could be turned into a `cron` job.
     
-    ```bash
-    ## ~/R/bin/update-R-devel.sh
-    #!/bin/bash
-    
-    # update source code
-    cd ~/R/src/r-devel/R
-    svn update
-    bash ./tools/rsync-recommended
-    bash ./tools/link-recommended
-    
-    # rebuild
-    cd  ~/R/bin
-    bash ./build-R-devel.sh
-    
-    # make and install
-    cd ~/R/src/R-devel-build
-    sudo make install
-    
-    # update R packages
-    echo "*** Installation complete. Updating R packages..."
-    Rscript-devel -e 'install.packages("lattice", lib.loc = .Library.site[1])'
-    Rscript-devel -e 'update.packages(ask = FALSE, lib.loc = .Library.site[1])'
-    echo "*** Done."
+    ```{r comment=''}
+    cat(readLines("R-devel/scripts/update-R-devel.sh"), sep = '\n')
     ```
 
     Be sure to give the script execute permissions:
     
     ```bash
-    chmod a+x ~/R/bin/update-R-devel.sh
+    chmod a+x ~/GitHub/r-config/R-devel/scripts/update-R-devel.sh
     ```
 
 12. Run R-devel:

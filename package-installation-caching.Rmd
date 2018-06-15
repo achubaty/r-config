@@ -1,0 +1,31 @@
+---
+title: "Using `ccache` to speed up package installation"
+author: "Alex M. Chubaty"
+date: "June 15, 2018"
+output: pdf_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Based on <http://dirk.eddelbuettel.com/blog/2017/11/27/#011_faster_package_installation_one>.
+
+1. Install `ccache` using:
+
+    ```bash
+    sudo apt install ccache
+    ```
+2. Add the following to `~/.R/Makevars`:
+
+    ```{r comment=''}
+    cat(readLines(".R/Makevars"), sep = '\n')
+    ```
+
+3. Add the following to `~/.ccache/ccache.conf`:
+
+    ```{r comment=''}
+    cat(readLines('.ccache/ccache.conf'), sep = '\n')
+    ```
