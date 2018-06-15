@@ -1,4 +1,4 @@
-# r-tools
+# r-config
 
 Useful snippets for `R`:
 
@@ -11,4 +11,3 @@ All R code/functions moved to my [`amc`](https://github.com/achubaty/amc) packag
 ```r
 devtools::install_github("achubaty/amc")
 ```
-
