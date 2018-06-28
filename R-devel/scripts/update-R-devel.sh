@@ -2,7 +2,7 @@
 #!/bin/bash
 
 # update source code
-cd ~/GitHub/r-config/R-devel/scripts/src/r-devel/R
+cd ~/R/src/r-devel/R
 svn update
 bash ./tools/rsync-recommended
 bash ./tools/link-recommended
