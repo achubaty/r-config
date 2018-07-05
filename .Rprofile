@@ -15,7 +15,9 @@ if (interactive()) {
   .Library.dev  <- '~/R-dev'
 
   # check for package updates and notify user (but don't install them)
-  if (!is.null(utils::old.packages(lib.loc = c(.Library.site[1], .Library.user)))) {
+  if (is.null(utils::old.packages(lib.loc = c(.Library.site[1], .Library.user)))) {
+    message("All CRAN packages up to date.")
+  } else {
     message("Package updates available:\n ",
             paste(rownames(utils::old.packages()), collapse = ", "))
   }
