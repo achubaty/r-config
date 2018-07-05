@@ -1,0 +1,13 @@
+CC=clang
+CXX=clang++
+
+## use the section below when installing data.table from source
+#CC=/usr/local/opt/llvm/bin/clang -fopenmp
+#CXX=/usr/local/opt/llvm/bin/clang++
+#LDFLAGS=-L/usr/local/opt/gettext/lib -L/usr/local/opt/llvm/lib
+#CPPFLAGS=-I/usr/local/opt/gettext/include -I/usr/local/opt/llvm/include
+
+## use latest frotran via homebrew
+F77 = /usr/local/bin/gfortran
+FC = $F77
+FLIBS = ""
