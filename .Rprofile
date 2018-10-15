@@ -1,4 +1,5 @@
 local({
+  Sys.setenv("cranRepo" = "https://cran.rstudio.com") ## needed for automated testing e.g., reproducible
   options("repos" = c(CRAN = "https://cran.rstudio.com"))
   options(Ncpus = parallel::detectCores() / 2)
 })
@@ -25,5 +26,5 @@ if (interactive()) {
   # load devtools and set dev library
   suppressMessages(library(devtools))
   options(devtools.name = "Alex Chubaty",
-          devtools.desc.author = 'person(c("Alex", "M"), "Chubaty", email = "alex.chubaty@gmail.com", role = c("aut", "cre"))')
+          devtools.desc.author = 'person(c("Alex", "M"), "Chubaty", email = "alex.chubaty@gmail.com", role = c("aut", "cre"), comments = c(ORCID = "0000-0001-7146-8135")))')
 }
