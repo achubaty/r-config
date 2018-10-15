@@ -133,6 +133,7 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 
     ```bash
     mkdir -p ~/R
+    mkdir -p ~/GitHub/r-config/R-devel/src/
     ln -s ~/GitHub/r-config/R-devel/src ~/R/src
     ```
 
@@ -166,6 +167,7 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 7. Make and install R-devel:
 
     ```bash
+    mkdir -p ~/R/src/R-devel-build
     bash ~/GitHub/r-config/R-devel/scripts/build-R-devel.sh
     
     cd ~/R/src/R-devel-build
