@@ -1,5 +1,6 @@
 ## ~/GitHub/r-config/R-devel/scripts/build-R-devel.sh
 #!/bin/sh
+mkdir -p ~/R/src/R-devel-build
 cd ~/R/src/R-devel-build
 
 # R_PAPERSIZE=letter                        \
