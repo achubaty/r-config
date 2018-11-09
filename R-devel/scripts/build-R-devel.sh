@@ -1,5 +1,7 @@
 ## ~/GitHub/r-config/R-devel/scripts/build-R-devel.sh
 #!/bin/sh
+mkdir -p ~/GitHub/r-config/R-devel/src
+ln -sfn ~/GitHub/r-config/R-devel/src ~/R/src
 mkdir -p ~/R/src/R-devel-build
 cd ~/R/src/R-devel-build
 
