@@ -5,18 +5,20 @@ local({
 })
 
 if (interactive()) {
-  .os <- tolower(Sys.info()[['sysname']])
+  .os <- tolower(Sys.info()[["sysname"]])
 
   exit <- Q <- function(save = "no", status = 0, runLast = TRUE) {
     q(save = save, status = 0, runLast = TRUE)
   }
 
   # package libraries
-  .Library.user <- Sys.getenv('R_LIBS_USER')
-  .Library.dev  <- '~/R-dev'
+  .Library.user <- Sys.getenv("R_LIBS_USER")
+  .Library.dev  <- "~/R-dev"
 
   # check for package updates and notify user (but don't install them)
-  if (is.null(utils::old.packages(lib.loc = c(.Library.site[1], .Library.user)))) {
+  libPaths <- if (.os == "darwin") normalizePath(.Library) else .Library.site[1]
+  libPaths <- c(libPaths, .Library.user)
+  if (is.null(utils::old.packages(lib.loc = libPaths))) {
     message("All CRAN packages up to date.")
   } else {
     message("Package updates available:\n ",
