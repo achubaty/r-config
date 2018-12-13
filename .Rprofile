@@ -24,6 +24,7 @@ if (interactive()) {
     message("Package updates available:\n ",
             paste(rownames(utils::old.packages()), collapse = ", "))
   }
+  rm(libPaths)
 
   # load devtools and set dev library
   suppressMessages(library(devtools))
