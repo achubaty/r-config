@@ -11,8 +11,6 @@ if (interactive()) {
     q(save = save, status = 0, runLast = TRUE)
   }
 
-  CC <- function(time = 60) reproducible::clearCache(after = Sys.time() - time)
-
   # package libraries
   .Library.user <- Sys.getenv("R_LIBS_USER")
   .Library.dev  <- "~/R-dev"
