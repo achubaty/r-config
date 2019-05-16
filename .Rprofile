@@ -26,7 +26,13 @@ if (interactive()) {
   }
   rm(libPaths)
 
-  # load devtools and set dev library
+  ## use rdoc package for pretty R help files when not in Rstudio
+  if (interactive() && !rstudioapi::isAvailable()) {
+    library(utils)
+    rdoc::use_rdoc()
+  }
+
+  ## load devtools and set dev library
   suppressMessages(library(devtools))
   options(devtools.name = "Alex Chubaty",
           devtools.desc.author = 'person(c("Alex", "M"), "Chubaty", email = "alex.chubaty@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-7146-8135"))')
