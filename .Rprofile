@@ -26,8 +26,14 @@ if (interactive()) {
   }
   rm(libPaths)
 
+  ## check to see if being run in Rstudio
+  ## based on https://stackoverflow.com/q/12389158/1380598
+  isRstudio <- rstudioapi::isAvailable() ||
+    Sys.getenv("RSTUDIO") == 1 ||
+    .Platform$GUI == "RStudio"
+
   ## use rdoc package for pretty R help files when not in Rstudio
-  if (interactive() && !rstudioapi::isAvailable()) {
+  if (!isRstudio) {
     library(utils)
     if (!require("rdoc", character.only = TRUE)) {
       install.packages("rdoc")
