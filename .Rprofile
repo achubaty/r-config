@@ -29,6 +29,9 @@ if (interactive()) {
   ## use rdoc package for pretty R help files when not in Rstudio
   if (interactive() && !rstudioapi::isAvailable()) {
     library(utils)
+    if (!require("rdoc", character.only = TRUE)) {
+      install.packages("rdoc")
+    }
     rdoc::use_rdoc()
   }
 
