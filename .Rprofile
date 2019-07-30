@@ -28,9 +28,8 @@ if (interactive()) {
 
   ## check to see if being run in Rstudio
   ## based on https://stackoverflow.com/q/12389158/1380598
-  isRstudio <- rstudioapi::isAvailable() ||
-    Sys.getenv("RSTUDIO") == 1 ||
-    .Platform$GUI == "RStudio"
+  isRstudio <- Sys.getenv("RSTUDIO") == 1 || .Platform$GUI == "RStudio" ||
+    if (suppressWarnings(require("rstudioapi", quietly = TRUE))) rstudio::isAvailable() else FALSE
 
   ## use rdoc package for pretty R help files when not in Rstudio
   if (!isRstudio) {
