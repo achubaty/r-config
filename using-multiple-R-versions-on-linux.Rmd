@@ -1,7 +1,7 @@
 ---
 title: "Using multiple R versions on Linux"
 author: "Alex M. Chubaty"
-date: "15 June 2018"
+date: "22 May 2020"
 output: 
   pdf_document: 
     highlight: pygments
@@ -18,12 +18,12 @@ Unlike on Windows, most R users on linux tend to work with a single version of R
 With a little bit of work, it is possible to use multiple versions of R on Linux; however, you will need an account with `sudo` privileges to set this up.
 
 The most common use case is to install R-devel alongside the current R version in order to facilitate package checking and testing prior to CRAN submission.
-Additionally, you may wish to maintain older versions of R to maintain compatibility and reproducbility of old code/scripts, or to rerun old anasyses.
+Additionally, you may wish to maintain older versions of R to maintain compatibility and reproducbility of old code/scripts, or to rerun old analyses.
 
 # Using Docker
 
 This is the preferred solution, as it is self-contained.
-Everytime you start an instance of R in a Docker container, it starts in a "factory fresh" state, which means you will need to install additional packages into each new instance or save (commit) your changes for later reuse.
+Every time you start an instance of R in a Docker container, it starts in a "factory fresh" state, which means you will need to install additional packages into each new instance or save (commit) your changes for later reuse.
 The advantages here are that packages installed for each project are kept separate, ensuring proper reproducibility and portability.
 (Although [`packrat`](https://rstudio.github.io/packrat/) is also good for maintaining separate package libraries per project, it doesn't ensure system dependency separation.)
 
@@ -39,13 +39,16 @@ See the offical [Docker documentation](https://docs.docker.com/) and the [rocker
 2. Download the image for the version of R you wish to use:
 
     ```bash
-    docker pull r-base:3.2.2
+    docker pull r-base:3.6.3
     ```
+
+  Alternatively, there are docker images that include Rstudio server built-in, so you can run a container and connect to it through your browser instead of having to work in a terminal.
+  See <https://hub.docker.com/r/rocker/rstudio> for details on setting up and running these containers.
 
 3. Start a container running the R version of your choice:
 
     ```bash
-    docker run -it --rm r-base:3.2.2
+    docker run -it --rm r-base:3.6.3
     ```
     
     \* NOTE: the `--rm` flag tells docker to remove the container after use.
@@ -92,7 +95,7 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 
     ```bash
     cd ~/R/src/
-    RVERSION=3.2.5
+    RVERSION=3.6.3
     wget https://cran.r-project.org/src/base/R-3/R-${RVERSION}.tar.gz
     tar -xvzf R-${RVERSION}.tar.gz
     ```
@@ -234,10 +237,21 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 
 \newpage
 
+## Switching R versions for use with RStudio
+
+RStudio will check for an environment variable, `RSTUDIO_WHICH_R`, which can be set to override using the installed system version of R.
+
+```bash
+export RSTUDIO_WHICH_R=/usr/local/bin/R-3.6.3
+rstudio &
+```
+
 # References
 
-- http://stackoverflow.com/a/24019938/1380598
-- https://stat.ethz.ch/pipermail/r-sig-debian/2012-August/001937.html
-- http://singmann.org/installing-r-devel-on-linux/
-- https://hub.docker.com/r/rocker/drd/~/dockerfile/
-- https://support.rstudio.com/hc/en-us/articles/218004217-Building-R-from-source
+- <https://stackoverflow.com/a/24019938/1380598>
+- <https://stat.ethz.ch/pipermail/r-sig-debian/2012-August/001937.html>
+- <http://singmann.org/installing-r-devel-on-linux/>
+- <https://hub.docker.com/r/rocker/drd/~/dockerfile/>
+- <https://support.rstudio.com/hc/en-us/articles/218004217-Building-R-from-source>
+- <https://community.rstudio.com/t/use-a-different-r-version-temporarily-in-rstudio/20848/8>
+
