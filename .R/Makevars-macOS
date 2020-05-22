@@ -2,12 +2,16 @@ CC=clang
 CXX=clang++
 
 ## use the section below when installing data.table from source
-#CC=/usr/local/opt/llvm/bin/clang -fopenmp
-#CXX=/usr/local/opt/llvm/bin/clang++
-#LDFLAGS=-L/usr/local/opt/gettext/lib -L/usr/local/opt/llvm/lib
-#CPPFLAGS=-I/usr/local/opt/gettext/include -I/usr/local/opt/llvm/include
+#LLVM_LOC = /usr/local/opt/llvm
+#CC=$(LLVM_LOC)/bin/clang -fopenmp
+#CXX=$(LLVM_LOC)/bin/clang++ -fopenmp
+## -O3 should be faster than -O2 (default) level optimisation ..
+#CFLAGS=-g -O3 -Wall -pedantic -std=gnu99 -mtune=native -pipe
+#CXXFLAGS=-g -O3 -Wall -pedantic -std=c++11 -mtune=native -pipe
+#LDFLAGS=-L/usr/local/opt/gettext/lib -L$(LLVM_LOC)/lib -Wl,-rpath,$(LLVM_LOC)/lib
+#CPPFLAGS=-I/usr/local/opt/gettext/include -I$(LLVM_LOC)/include
 
-## use latest frotran via homebrew
+## use latest fortran via homebrew
 F77 = /usr/local/bin/gfortran
 FC = $F77
 FLIBS = ""
