@@ -28,8 +28,13 @@ if (interactive()) {
 
   ## check to see if being run in Rstudio
   ## based on https://stackoverflow.com/q/12389158/1380598
-  isRstudio <- Sys.getenv("RSTUDIO") == 1 || .Platform$GUI == "RStudio" ||
-    if (suppressWarnings(require("rstudioapi", quietly = TRUE))) rstudioapi::isAvailable() else FALSE
+  isRstudio <- Sys.getenv("RSTUDIO") == 1 ||
+    .Platform$GUI == "RStudio" ||
+    if (suppressWarnings(requireNamespace("rstudioapi", quietly = TRUE))) {
+      rstudioapi::isAvailable()
+    } else {
+      FALSE
+    }
 
   ## use rdoc package for pretty R help files when not in Rstudio
   if (!isRstudio) {
@@ -43,5 +48,9 @@ if (interactive()) {
   ## load devtools and set dev library
   suppressMessages(library(devtools))
   options(devtools.name = "Alex Chubaty",
-          devtools.desc.author = 'person(c("Alex", "M"), "Chubaty", email = "alex.chubaty@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-7146-8135"))')
+          devtools.desc.author = utils::person(c("Alex", "M"), "Chubaty",
+                                               email = "alex.chubaty@gmail.com",
+                                               role = c("aut", "cre"),
+                                               comment = c(ORCID = "0000-0001-7146-8135"))
+  )
 }
