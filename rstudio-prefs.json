@@ -1,0 +1,47 @@
+{
+    "save_workspace": "never",
+    "load_workspace": false,
+    "remove_history_duplicates": true,
+    "highlight_selected_line": true,
+    "margin_column": 100,
+    "show_invisibles": true,
+    "show_indent_guides": true,
+    "highlight_r_function_calls": true,
+    "auto_append_newline": true,
+    "strip_trailing_whitespace": true,
+    "show_help_tooltip_on_idle": true,
+    "check_unexpected_assignment_in_function_call": true,
+    "style_diagnostics": true,
+    "code_completion": "manual",
+    "font_size_points": 12,
+    "editor_theme": "Cobalt",
+    "posix_terminal_shell": "bash",
+    "panes": {
+        "quadrants": [
+            "Source",
+            "TabSet1",
+            "Console",
+            "TabSet2"
+        ],
+        "tabSet1": [
+            "Environment",
+            "History",
+            "Connections",
+            "Build",
+            "VCS",
+            "Tutorial",
+            "Presentation"
+        ],
+        "tabSet2": [
+            "Files",
+            "Plots",
+            "Packages",
+            "Help",
+            "Viewer"
+        ],
+        "console_left_on_top": false,
+        "console_right_on_top": true
+    },
+    "show_doc_outline_rmd": true,
+    "spelling_dictionary_language": "en_CA"
+}
