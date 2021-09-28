@@ -60,7 +60,7 @@ if (interactive()) {
   suppressMessages(library(devtools))
   options(devtools.name = "Alex Chubaty",
           devtools.desc.author = utils::person(c("Alex", "M"), "Chubaty",
-                                               email = "alex.chubaty@gmail.com",
+                                               email = "achubaty@for-cast.ca",
                                                role = c("aut", "cre"),
                                                comment = c(ORCID = "0000-0001-7146-8135"))
   )
