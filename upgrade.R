@@ -16,5 +16,5 @@ install.packages(pkgs[amc::pkgSrc(pkgs, oldLibDir) == "CRAN"], newLibDir)
 
 ## install GitHub packages
 ids <- which(!(amc::pkgSrc(pkgs, oldLibDir) %in% c("CRAN", "Bioconductor", "Other")))
-sapply(amc::pkgSrc(pkgs, oldLibDir)[ids], devtools::install_github)
+sapply(amc::pkgSrc(pkgs, oldLibDir)[ids], devtools::install_github, force = TRUE)
 
