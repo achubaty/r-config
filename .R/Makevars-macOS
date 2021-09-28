@@ -12,6 +12,6 @@ CXX=clang++
 #CPPFLAGS=-I/usr/local/opt/gettext/include -I$(LLVM_LOC)/include
 
 ## use latest fortran via homebrew
-F77 = /usr/local/bin/gfortran
-FC = $F77
-FLIBS = ""
+F77=/usr/local/bin/gfortran
+FC=/usr/local/bin/gfortran
+FLIBS=""
