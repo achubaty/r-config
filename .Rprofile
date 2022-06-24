@@ -57,6 +57,9 @@ if (interactive()) {
   }
 
   ## load devtools and set dev library
+  if (!require("devtools", character.only = TRUE, quietly = TRUE)) {
+      install.packages("devtools")
+  }
   suppressMessages(library(devtools))
   options(devtools.name = "Alex Chubaty",
           devtools.desc.author = utils::person(c("Alex", "M"), "Chubaty",
