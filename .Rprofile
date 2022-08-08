@@ -77,16 +77,16 @@ if (interactive()) {
       install.packages("rgdal", type = "source", repos = repos,
                        configure.args = c("--with-proj-lib=/usr/local/lib/",
                                           "--with-proj-include=/usr/local/include/"))
-      install.packages("sf", type = "source", repos = repos,
+      install.packages(c("sf", "terra"), type = "source", repos = repos,
                        configure.args = "--with-proj-lib=/usr/local/lib/")
     } else {
       install.packages("rgdal", type = "source", repos = repos)
-      install.packages("sf", type = "source", repos = "https://cran.rstudio.com")
+      install.packages(c("sf", "terra"), type = "source", repos = "https://cran.rstudio.com")
     }
 
     # other spatial packages ----------------------------------------------------------------------
 
-    otherSpatialPackages <- c("rgeos", "sp", "raster", "terra", "lwgeom")
+    otherSpatialPackages <- c("rgeos", "sp", "raster", "lwgeom")
     install.packages(otherSpatialPackages, type = "source", repos = repos)
   }
 }
