@@ -9,8 +9,12 @@ local({
       paste(getRversion(), R.version["platform"], R.version["arch"], R.version["os"]),
       ")"
     )
-    options(repos = c(CRAN = paste0("https://packagemanager.rstudio.com/all/__linux__/",
-                                    .os.version, "/latest")))
+    options(
+      repos = c(
+        CRAN = paste0("https://packagemanager.rstudio.com/all/__linux__/", .os.version, "/latest"),
+        PE = "https://PredictiveEcology.r-universe.dev"
+      )
+    )
     options(HTTPUserAgent = .user.agent)
   }
 })
@@ -57,6 +61,9 @@ if (interactive()) {
   }
 
   ## load devtools and set dev library
+  if (!require("devtools", character.only = TRUE, quietly = TRUE)) {
+      install.packages("devtools")
+  }
   suppressMessages(library(devtools))
   options(devtools.name = "Alex Chubaty",
           devtools.desc.author = utils::person(c("Alex", "M"), "Chubaty",
