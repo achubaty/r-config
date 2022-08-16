@@ -64,26 +64,4 @@ if (interactive()) {
                                                role = c("aut", "cre"),
                                                comment = c(ORCID = "0000-0001-7146-8135"))
   )
-
-  ## (re)install spatial packages
-  installSpatialPackages <- function(repos = "https://cran.rstudio.com") {
-    ## rgdal and sf need additional args for homebrew on macOS
-    if (Sys.info()[["sysname"]] == "Darwin") {
-      stopifnot(nzchar(Sys.which("brew")))
-
-      install.packages("rgdal", type = "source", repos = repos,
-                       configure.args = c("--with-proj-lib=/usr/local/lib/",
-                                          "--with-proj-include=/usr/local/include/"))
-      install.packages("sf", type = "source", repos = repos,
-                       configure.args = "--with-proj-lib=/usr/local/lib/")
-    } else {
-      install.packages("rgdal", type = "source", repos = repos)
-      install.packages("sf", type = "source", repos = "https://cran.rstudio.com")
-    }
-
-    # other spatial packages ----------------------------------------------------------------------
-
-    otherSpatialPackages <- c("rgeos", "sp", "raster", "terra", "lwgeom")
-    install.packages(otherSpatialPackages, type = "source", repos = repos)
-  }
 }
