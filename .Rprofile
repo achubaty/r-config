@@ -11,7 +11,11 @@ local({
     )
     options(
       repos = c(
-        CRAN = paste0("https://packagemanager.rstudio.com/all/__linux__/", .os.version, "/latest"),
+        CRAN = if (!grepl("R Under development", R.version.string)) {
+          paste0("https://packagemanager.rstudio.com/all/__linux__/", .os.version, "/latest")
+        } else {
+          "https://cran.rstudio.com"
+        },
         PE = "https://PredictiveEcology.r-universe.dev"
       )
     )
