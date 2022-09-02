@@ -3,7 +3,7 @@ local({
   options("repos" = c(CRAN = "https://cran.rstudio.com"))
 
   if (Sys.info()["sysname"] == "Linux" && grepl("Ubuntu", utils::osVersion)) {
-    .os.version <- strsplit(system("lsb_release -c", intern = TRUE), ":\t")[[1]][[2]]
+    .os.version <- system("lsb_release -cs", intern = TRUE)
     .user.agent <- paste0(
       "R/", getRversion(), " R (",
       paste(getRversion(), R.version["platform"], R.version["arch"], R.version["os"]),
