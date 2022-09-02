@@ -1,5 +1,5 @@
 local({
-  options(Ncpus = parallel::detectCores() / 2)
+  options(Ncpus = min(parallel::detectCores() / 2, 120))
   options("repos" = c(CRAN = "https://cran.rstudio.com"))
 
   if (Sys.info()["sysname"] == "Linux" && grepl("Ubuntu", utils::osVersion)) {
