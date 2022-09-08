@@ -1,14 +1,9 @@
 local({
-  options(Ncpus = min(parallel::detectCores() / 2, 120))
-  options("repos" = c(CRAN = "https://cran.rstudio.com"))
+  options(Ncpus = min(parallel::detectCores() / 2, 120),
+          repos = c(CRAN = "https://cran.rstudio.com"))
 
   if (Sys.info()["sysname"] == "Linux" && grepl("Ubuntu", utils::osVersion)) {
     .os.version <- system("lsb_release -cs", intern = TRUE)
-    .user.agent <- paste0(
-      "R/", getRversion(), " R (",
-      paste(getRversion(), R.version["platform"], R.version["arch"], R.version["os"]),
-      ")"
-    )
     options(
       repos = c(
         CRAN = if (!grepl("R Under development", R.version.string)) {
@@ -19,7 +14,6 @@ local({
         PE = "https://PredictiveEcology.r-universe.dev"
       )
     )
-    options(HTTPUserAgent = .user.agent)
   }
 })
 
