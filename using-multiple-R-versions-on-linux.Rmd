@@ -18,7 +18,7 @@ Unlike on Windows, most R users on linux tend to work with a single version of R
 With a little bit of work, it is possible to use multiple versions of R on Linux; however, you will need an account with `sudo` privileges to set this up.
 
 The most common use case is to install R-devel alongside the current R version in order to facilitate package checking and testing prior to CRAN submission.
-Additionally, you may wish to maintain older versions of R to maintain compatibility and reproducbility of old code/scripts, or to rerun old analyses.
+Additionally, you may wish to maintain older versions of R to maintain compatibility and reproducibility of old code/scripts, or to rerun old analyses.
 
 # Using Docker
 
@@ -120,7 +120,7 @@ As noted above, using Docker is likely a better solution, as this approach doesn
     From the commandline, simply do (according to `${RVERSION}`):
     
     ```bash
-    R-3.2.5
+    R-3.6.3
     ```
 
 ## R-devel
