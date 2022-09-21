@@ -1,11 +1,12 @@
 ---
 title: "Using multiple R versions on Linux"
 author: "Alex M. Chubaty"
-date: "22 May 2020"
+date: "20 Sep 2022"
 output: 
   pdf_document: 
     highlight: pygments
     toc: yes
+    toc_depth: 3
 editor_options: 
   chunk_output_type: console
 ---
@@ -25,10 +26,10 @@ Additionally, you may wish to maintain older versions of R to maintain compatibi
 This is the preferred solution, as it is self-contained.
 Every time you start an instance of R in a Docker container, it starts in a "factory fresh" state, which means you will need to install additional packages into each new instance or save (commit) your changes for later reuse.
 The advantages here are that packages installed for each project are kept separate, ensuring proper reproducibility and portability.
-(Although [`packrat`](https://rstudio.github.io/packrat/) is also good for maintaining separate package libraries per project, it doesn't ensure system dependency separation.)
+(Although [`renv`](https://rstudio.github.io/renv/) is also good for maintaining separate package libraries per project, it doesn't ensure system dependency separation.)
 
 Please note that this guide is intended only to get you started with using R with Docker, not to be a full tutorial for more advanced Docker use.
-See the offical [Docker documentation](https://docs.docker.com/) and the [rocker project](https://github.com/rocker-org/rocker) for more advanced usage, including using containers with Rstudio Server installed[^1] or using a virtual X server.
+See the official [Docker documentation](https://docs.docker.com/) and the [rocker project](https://github.com/rocker-org/rocker) for more advanced usage, including using containers with Rstudio Server installed[^1] or using a virtual X server.
 
 [^1]: https://github.com/rocker-org/rocker-versioned
 
@@ -42,9 +43,6 @@ See the offical [Docker documentation](https://docs.docker.com/) and the [rocker
     docker pull r-base:3.6.3
     ```
 
-  Alternatively, there are docker images that include Rstudio server built-in, so you can run a container and connect to it through your browser instead of having to work in a terminal.
-  See <https://hub.docker.com/r/rocker/rstudio> for details on setting up and running these containers.
-
 3. Start a container running the R version of your choice:
 
     ```bash
@@ -53,6 +51,22 @@ See the offical [Docker documentation](https://docs.docker.com/) and the [rocker
     
     \* NOTE: the `--rm` flag tells docker to remove the container after use.
     If you wish to keep the container for reuse later (*e.g.*, so you don't need to reinstall packages, etc.), then omit this.
+
+### Docker images wth Rstudio
+
+Alternatively, there are docker images that include Rstudio server built-in, so you can run a container and connect to it through your browser instead of having to work in a terminal.
+
+1. *E.g.*, start a versioned container running Rstudio that includes geospatial libraries:
+
+    ```bash
+    docker run --rm -ti -p 8787:8080 rocker/geospatial:4.0.3
+    ```
+    
+2. Look for the user password to appear (in red) once it's done setting up the container.
+
+3. Open a web browser and go to `localhost:8080` to get to the Rstudio instance running in the docker container.
+
+4. Log in with username `rstudio` and the password from step 2.
 
 ## R-devel
 
@@ -75,7 +89,7 @@ See the offical [Docker documentation](https://docs.docker.com/) and the [rocker
 
 # Metal installation
 
-As noted above, using Docker is likely a better solution, as this approach doesn't maintain separation between packages installed for different versions (except R-devel).
+As noted above, using Docker is likely a better solution, as this approach doesn't maintain separation between packages installed for different minor versions.
 
 ## Older R versions
 
@@ -93,10 +107,21 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 
 3. Get the source code for the version of R you wish to install:
 
+    R 3.y.z:
+    
     ```bash
     cd ~/R/src/
     RVERSION=3.6.3
     wget https://cran.r-project.org/src/base/R-3/R-${RVERSION}.tar.gz
+    tar -xvzf R-${RVERSION}.tar.gz
+    ```
+
+    R 4.y.z:
+    
+    ```bash
+    cd ~/R/src/
+    RVERSION=4.0.5
+    wget https://cran.r-project.org/src/base/R-4/R-${RVERSION}.tar.gz
     tar -xvzf R-${RVERSION}.tar.gz
     ```
 
@@ -121,6 +146,8 @@ As noted above, using Docker is likely a better solution, as this approach doesn
     
     ```bash
     R-3.6.3
+    # or
+    R-4.0.5
     ```
 
 ## R-devel
