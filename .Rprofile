@@ -1,19 +1,19 @@
 local({
   options(Ncpus = min(parallel::detectCores() / 2, 120),
-          repos = c(CRAN = "https://cran.rstudio.com"))
+          repos = c(CRAN = "https://cran.rstudio.com",
+                    PE = "https://PredictiveEcology.r-universe.dev"))
 
   if (Sys.info()["sysname"] == "Linux" && grepl("Ubuntu", utils::osVersion)) {
-    .os.version <- system("lsb_release -cs", intern = TRUE)
-    options(
-      repos = c(
-        CRAN = if (!grepl("R Under development", R.version.string)) {
-          paste0("https://packagemanager.rstudio.com/all/__linux__/", .os.version, "/latest")
-        } else {
-          "https://cran.rstudio.com"
-        },
-        PE = "https://PredictiveEcology.r-universe.dev"
+    if (!grepl("R Under development", R.version.string)) {
+      .os.version <- system("lsb_release -cs", intern = TRUE)
+
+      options(
+        repos = c(
+          CRAN = paste0("https://packagemanager.rstudio.com/all/__linux__/", .os.version, "/latest"),
+          getOption("repos")
+        )
       )
-    )
+    }
   }
 })
 
@@ -51,22 +51,23 @@ if (interactive()) {
 
   ## use rdoc package for pretty R help files when not in Rstudio
   if (!isRstudio) {
-    library(utils)
     if (!require("rdoc", character.only = TRUE, quietly = TRUE)) {
-      install.packages("rdoc")
+      utils::install.packages("rdoc")
     }
     rdoc::use_rdoc()
   }
 
   ## load devtools and set dev library
-  if (!require("devtools", character.only = TRUE, quietly = TRUE)) {
+  if (isRstudio) {
+    if (!require("devtools", character.only = TRUE, quietly = TRUE)) {
       install.packages("devtools")
+    }
+    suppressMessages(library(devtools))
+    options(devtools.name = "Alex Chubaty",
+            devtools.desc.author = utils::person(c("Alex", "M"), "Chubaty",
+                                                 email = "achubaty@for-cast.ca",
+                                                 role = c("aut", "cre"),
+                                                 comment = c(ORCID = "0000-0001-7146-8135"))
+    )
   }
-  suppressMessages(library(devtools))
-  options(devtools.name = "Alex Chubaty",
-          devtools.desc.author = utils::person(c("Alex", "M"), "Chubaty",
-                                               email = "achubaty@for-cast.ca",
-                                               role = c("aut", "cre"),
-                                               comment = c(ORCID = "0000-0001-7146-8135"))
-  )
 }
