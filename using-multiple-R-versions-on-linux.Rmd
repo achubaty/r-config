@@ -268,9 +268,20 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 
 RStudio will check for an environment variable, `RSTUDIO_WHICH_R`, which can be set to override using the installed system version of R.
 
+### Rstudio desktop
+
 ```bash
 export RSTUDIO_WHICH_R=/usr/local/bin/R-3.6.3
 rstudio &
+```
+
+### Rstudio server
+
+As `root` user:
+
+```bash
+umask 0022
+echo "export RSTUDIO_WHICH_R=/usr/local/bin/R-3.6.3" > /etc/profile.d/rstudio.sh
 ```
 
 # References
@@ -281,4 +292,4 @@ rstudio &
 - <https://hub.docker.com/r/rocker/drd/~/dockerfile/>
 - <https://support.rstudio.com/hc/en-us/articles/218004217-Building-R-from-source>
 - <https://community.rstudio.com/t/use-a-different-r-version-temporarily-in-rstudio/20848/8>
-
+- <https://solutions.rstudio.com/sys-admin/advanced-config/environment-variables/>
