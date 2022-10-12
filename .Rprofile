@@ -28,16 +28,19 @@ if (interactive()) {
   .Library.user <- Sys.getenv("R_LIBS_USER")
   .Library.dev  <- "~/R-dev"
 
-  # check for package updates and notify user (but don't install them)
-  libPaths <- if (.os == "darwin") normalizePath(.Library) else .Library.site[1]
-  libPaths <- c(libPaths, .Library.user)
-  if (is.null(utils::old.packages(lib.loc = libPaths))) {
-    message("All CRAN packages up to date.")
-  } else {
-    message("Package updates available:\n ",
-            paste(rownames(utils::old.packages()), collapse = ", "))
+  if (FALSE) {
+    # check for package updates and notify user (but don't install them)
+    libPaths <- if (.os == "darwin") normalizePath(.Library) else .Library.site[1]
+    libPaths <- c(libPaths, .Library.user)
+    op <- utils::old.packages(lib.loc = libPaths)
+    if (is.null(op)) {
+      message("All CRAN packages up to date.")
+    } else {
+      message("Package updates available:\n ",
+              paste(rownames(op), collapse = ", "))
+    }
+    rm(libPaths)
   }
-  rm(libPaths)
 
   ## check to see if being run in Rstudio
   ## based on https://stackoverflow.com/q/12389158/1380598
