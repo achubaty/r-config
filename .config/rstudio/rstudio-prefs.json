@@ -1,6 +1,5 @@
 {
     "save_workspace": "never",
-    "load_workspace": false,
     "remove_history_duplicates": true,
     "highlight_selected_line": true,
     "margin_column": 100,
@@ -14,8 +13,9 @@
     "style_diagnostics": true,
     "code_completion": "manual",
     "font_size_points": 12,
-    "editor_theme": "Cobalt",
+    "spelling_dictionary_language": "en_CA",
     "posix_terminal_shell": "bash",
+    "editor_theme": "Cobalt",
     "panes": {
         "quadrants": [
             "Source",
@@ -37,11 +37,24 @@
             "Plots",
             "Packages",
             "Help",
-            "Viewer"
+            "Viewer",
+            "Presentations"
         ],
+        "hiddenTabSet": [],
         "console_left_on_top": false,
-        "console_right_on_top": true
+        "console_right_on_top": true,
+        "additional_source_columns": 0
     },
-    "show_doc_outline_rmd": true,
-    "spelling_dictionary_language": "en_CA"
+    "jobs_tab_visibility": "shown",
+    "initial_working_directory": "~",
+    "file_monitor_ignored_components": [
+        "data/",
+        "inputs/",
+        "outputs/",
+        "packages/"
+    ],
+    "document_author": "Alex Chubaty",
+    "load_workspace": false,
+    "auto_detect_indentation": true,
+    "rainbow_parentheses": true
 }
