@@ -1,5 +1,6 @@
 CC=clang
-CXX=clang++
+CXX=clang++ -std=gnu++11
+PKG_CXXFLAGS= -stdlib=libc++ -std=c++11
 
 ## use the section below when installing data.table from source
 #LLVM_LOC = /usr/local/opt/llvm
