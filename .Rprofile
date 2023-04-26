@@ -63,7 +63,7 @@ if (interactive()) {
   ## load devtools and set dev library
   if (isRstudio) {
     if (!require("devtools", character.only = TRUE, quietly = TRUE)) {
-      install.packages("devtools")
+      utils::install.packages("devtools")
     }
     suppressMessages(library(devtools))
     options(devtools.name = "Alex Chubaty",
