@@ -1,6 +1,6 @@
 local({
   options(Ncpus = min(parallel::detectCores() / 2, 120),
-          repos = c(CRAN = "https://cran.rstudio.com",
+          repos = c(CRAN = "https://cloud.r-project.org",
                     PE = "https://PredictiveEcology.r-universe.dev"))
 
   if (Sys.info()["sysname"] == "Linux" && grepl("Ubuntu", utils::osVersion)) {
@@ -9,7 +9,7 @@ local({
 
       options(
         repos = c(
-          CRAN = paste0("https://packagemanager.rstudio.com/all/__linux__/", .os.version, "/latest"),
+          CRAN = paste0("https://packagemanager.posit.co/all/__linux__/", .os.version, "/latest"),
           getOption("repos")
         )
       )
@@ -63,14 +63,21 @@ if (interactive()) {
   ## load devtools and set dev library
   if (isRstudio) {
     if (!require("devtools", character.only = TRUE, quietly = TRUE)) {
-      install.packages("devtools")
+      utils::install.packages("devtools")
     }
-    suppressMessages(library(devtools))
-    options(devtools.name = "Alex Chubaty",
-            devtools.desc.author = utils::person(c("Alex", "M"), "Chubaty",
-                                                 email = "achubaty@for-cast.ca",
-                                                 role = c("aut", "cre"),
-                                                 comment = c(ORCID = "0000-0001-7146-8135"))
+    suppressMessages(require(devtools))
+    options(
+      usethis.full_name = "Alex Chubaty",
+      usethis.description = list(
+        "Authors@R" = utils::person(
+          c("Alex", "M"), "Chubaty",
+          email = "achubaty@for-cast.ca",
+          role = c("aut", "cre"),
+          comment = c(ORCID = "0000-0001-7146-8135")
+        ),
+        version = "0.0.0.9000"
+      ),
+      usethis.destdir = "~/GitHub"
     )
   }
 }

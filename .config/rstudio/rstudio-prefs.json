@@ -5,7 +5,6 @@
     "highlight_selected_line": true,
     "margin_column": 100,
     "show_invisibles": true,
-    "show_indent_guides": true,
     "highlight_r_function_calls": true,
     "auto_append_newline": true,
     "strip_trailing_whitespace": true,
@@ -37,11 +36,29 @@
             "Plots",
             "Packages",
             "Help",
-            "Viewer"
+            "Viewer",
+            "Presentations"
         ],
+        "hiddenTabSet": [],
         "console_left_on_top": false,
-        "console_right_on_top": true
+        "console_right_on_top": true,
+        "additional_source_columns": 0
     },
     "show_doc_outline_rmd": true,
-    "spelling_dictionary_language": "en_CA"
+    "spelling_dictionary_language": "en_CA",
+    "default_project_location": "~/GitHub",
+    "jobs_tab_visibility": "shown",
+    "initial_working_directory": "~",
+    "rainbow_parentheses": true,
+    "document_author": "Alex M. Chubaty",
+    "file_monitor_ignored_components": [
+        "data/",
+        "inputs/",
+        "outputs/",
+        "packages/"
+    ],
+    "auto_detect_indentation": true,
+    "pdf_previewer": "none",
+    "new_proj_git_init": true,
+    "source_with_echo": true
 }
