@@ -1,6 +1,6 @@
 {
-    "save_workspace": "never",
     "load_workspace": false,
+    "save_workspace": "never",
     "remove_history_duplicates": true,
     "highlight_selected_line": true,
     "margin_column": 100,
@@ -13,8 +13,9 @@
     "style_diagnostics": true,
     "code_completion": "manual",
     "font_size_points": 12,
-    "editor_theme": "Cobalt",
+    "spelling_dictionary_language": "en_CA",
     "posix_terminal_shell": "bash",
+    "editor_theme": "Cobalt",
     "panes": {
         "quadrants": [
             "Source",
@@ -52,6 +53,7 @@
     "rainbow_parentheses": true,
     "document_author": "Alex M. Chubaty",
     "file_monitor_ignored_components": [
+        "cache/",
         "data/",
         "inputs/",
         "outputs/",
