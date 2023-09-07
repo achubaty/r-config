@@ -1,7 +1,7 @@
 ---
 title: "Using multiple R versions on Linux"
 author: "Alex M. Chubaty"
-date: "20 Sep 2022"
+date: "29 Jun 2023"
 output: 
   pdf_document: 
     highlight: pygments
@@ -15,13 +15,19 @@ editor_options:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+# Overview
+
 Unlike on Windows, most R users on linux tend to work with a single version of R -- whichever version is available in their software repositories.
 With a little bit of work, it is possible to use multiple versions of R on Linux; however, you will need an account with `sudo` privileges to set this up.
 
 The most common use case is to install R-devel alongside the current R version in order to facilitate package checking and testing prior to CRAN submission.
-Additionally, you may wish to maintain older versions of R to maintain compatibility and reproducibility of old code/scripts, or to rerun old analyses.
+Additionally, you may wish to maintain older versions of R to maintain compatibility and reproducibility of old projects, scripts, etc.
 
-# Using Docker
+This document provides an overview of several approaches to working with multiple versions of R on Linux - although these can also be used on macOS and Windows.
+
+\newpage
+
+# 1. Using Docker
 
 This is the preferred solution, as it is self-contained.
 Every time you start an instance of R in a Docker container, it starts in a "factory fresh" state, which means you will need to install additional packages into each new instance or save (commit) your changes for later reuse.
@@ -29,9 +35,9 @@ The advantages here are that packages installed for each project are kept separa
 (Although [`renv`](https://rstudio.github.io/renv/) is also good for maintaining separate package libraries per project, it doesn't ensure system dependency separation.)
 
 Please note that this guide is intended only to get you started with using R with Docker, not to be a full tutorial for more advanced Docker use.
-See the official [Docker documentation](https://docs.docker.com/) and the [rocker project](https://github.com/rocker-org/rocker) for more advanced usage, including using containers with Rstudio Server installed[^1] or using a virtual X server.
+See the official [Docker documentation](https://docs.docker.com/) and the [rocker project](https://github.com/rocker-org/rocker) for more advanced usage, including using containers with RStudio Server installed[^1] or using a virtual X server.
 
-[^1]: https://github.com/rocker-org/rocker-versioned
+[^1]: <https://github.com/rocker-org/rocker-versioned2>
 
 ## Older R versions
 
@@ -52,30 +58,16 @@ See the official [Docker documentation](https://docs.docker.com/) and the [rocke
     \* NOTE: the `--rm` flag tells docker to remove the container after use.
     If you wish to keep the container for reuse later (*e.g.*, so you don't need to reinstall packages, etc.), then omit this.
 
-### Docker images wth Rstudio
-
-Alternatively, there are docker images that include Rstudio server built-in, so you can run a container and connect to it through your browser instead of having to work in a terminal.
-
-1. *E.g.*, start a versioned container running Rstudio that includes geospatial libraries:
-
-    ```bash
-    docker run --rm -ti -p 8787:8080 rocker/geospatial:4.0.3
-    ```
-    
-2. Look for the user password to appear (in red) once it's done setting up the container.
-
-3. Open a web browser and go to `localhost:8080` to get to the Rstudio instance running in the docker container.
-
-4. Log in with username `rstudio` and the password from step 2.
-
 ## R-devel
 
 1. Install Docker following the instructions [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
+
 2. Download the latest R-devel image:
 
     ```bash
     docker pull rocker/drd
     ```
+
 3. Start a container running R-devel:
 
     ```bash
@@ -85,11 +77,99 @@ Alternatively, there are docker images that include Rstudio server built-in, so 
     \* NOTE: the `--rm` flag tells docker to remove the container after use.
     If you wish to keep the container for reuse later (*e.g.*, so you don't need to reinstall packages, etc.), then omit this.
 
+## Using RStudio
+
+Alternatively, there are docker images that include RStudio server built-in, so you can run a container and connect to it through your browser instead of having to work in a terminal.
+
+1. *E.g.*, start a versioned container running RStudio that includes geospatial libraries from the unstable ubuntugis repo:
+
+    ```bash
+    docker run --rm -ti -p 127.0.0.1:8080:8787 rocker/geospatial:4.2.3-ubuntugis
+    ```
+    
+2. Look for the user password to appear (in red) once it's done setting up the container.
+
+3. Open a web browser and go to `localhost:8080` to get to the RStudio instance running in the docker container.
+
+4. Log in with username `rstudio` and the password from step 2.
+
 \newpage
 
-# Metal installation
+# 2. Using `rig`
 
-As noted above, using Docker is likely a better solution, as this approach doesn't maintain separation between packages installed for different minor versions.
+Using the R installation manager `rig` (<https://github.com/r-lib/rig>) is the easiest approach, as it automates the installation an linking of different R versions, and is cross-platfrom (works with Windows, macOS, and Linux).
+Although each version of R maintains separate package libraries, users should strive to use per-project package libraries, e.g., using [`renv`](https://rstudio.github.io/renv/).
+
+1. Install `rig` using the platform-specific installation instructions are provide at <https://github.com/r-lib/rig#id-installation>;
+
+2. Install the R versions you need:
+
+    ```bash
+    rig add release
+    rig add devel
+    ```
+  
+    ```bash
+    rig add 4.1
+    rig add 4.2
+    rig add 4.3
+    ```
+  
+    You can see the available versions (and the default, starred) by using `rig list`.
+    
+    Set the default version using the names from `rig list`:
+    
+    ```bash
+    rig default 4.3-arm64
+    ```
+
+3. Setup symlinks to allow easy launch of versioned R sessions:
+
+  ```bash
+  rig system make-links
+  ```
+  
+  Use e.g., `R-4.3-arm64` on macOS.
+
+4. On macOS, restrict access to system package directories:
+
+    ```bash
+    rig system fix-permissions
+    ```
+
+5. On macOS can also use the menu bar app (<https://github.com/r-lib/rig#id-macos-menu-bar-app>) to manage their R versions:
+
+    ```bash
+    open -a Rig
+    ```
+
+Be sure to open the Rig app preferences to allow launch at startup.
+
+## Switching R versions using `rig`
+
+### Setting the default version
+
+```bash
+## e.g., on macOS:
+rig default 4.3-arm64
+```
+
+Users on macOS can also use the menu bar app.
+
+### Selectively launching an RStudio seesion using specific version of R
+
+```bash
+## e.g., on macOS:
+rig rstudio 4.2-arm64
+```
+
+Users on macOS can also use the menu bar app.
+
+\newpage
+
+# 3. Manual build + installation
+
+As noted above, using Docker or `rig` are likely better solutions, as manual installations require manual upkeep and manual *uninstallation*.
 
 ## Older R versions
 
@@ -120,7 +200,7 @@ As noted above, using Docker is likely a better solution, as this approach doesn
     
     ```bash
     cd ~/R/src/
-    RVERSION=4.0.5
+    RVERSION=4.2.3
     wget https://cran.r-project.org/src/base/R-4/R-${RVERSION}.tar.gz
     tar -xvzf R-${RVERSION}.tar.gz
     ```
@@ -147,8 +227,10 @@ As noted above, using Docker is likely a better solution, as this approach doesn
     ```bash
     R-3.6.3
     # or
-    R-4.0.5
+    R-4.2.3
     ```
+
+\newpage
 
 ## R-devel
 
@@ -264,20 +346,20 @@ As noted above, using Docker is likely a better solution, as this approach doesn
 
 \newpage
 
-## Switching R versions for use with RStudio
+## Manually switching R versions for use with RStudio
 
 RStudio will check for an environment variable, `RSTUDIO_WHICH_R`, which can be set to override using the installed system version of R.
 
-### Rstudio desktop
+### RStudio desktop
 
 ```bash
-export RSTUDIO_WHICH_R=/usr/local/bin/R-3.6.3
+export RSTUDIO_WHICH_R=/usr/local/bin/R-4.2.3
 rstudio &
 ```
 
-### Rstudio server
+### RStudio server
 
-As `root` user:
+As `sudo` user:
 
 ```bash
 umask 0022
@@ -289,7 +371,9 @@ echo "export RSTUDIO_WHICH_R=/usr/local/bin/R-3.6.3" > /etc/profile.d/rstudio.sh
 - <https://stackoverflow.com/a/24019938/1380598>
 - <https://stat.ethz.ch/pipermail/r-sig-debian/2012-August/001937.html>
 - <http://singmann.org/installing-r-devel-on-linux/>
+- <https://github.com/rocker-org/rocker-versioned2>
 - <https://hub.docker.com/r/rocker/drd/~/dockerfile/>
-- <https://support.rstudio.com/hc/en-us/articles/218004217-Building-R-from-source>
+- <https://support.posit.co/hc/en-us/articles/218004217-Building-R-from-source>
 - <https://community.rstudio.com/t/use-a-different-r-version-temporarily-in-rstudio/20848/8>
-- <https://solutions.rstudio.com/sys-admin/advanced-config/environment-variables/>
+- <https://solutions.posit.co/envs-pkgs/environment-variables/>
+- <https://github.com/r-lib/rig>
