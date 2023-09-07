@@ -1,7 +1,14 @@
 local({
-  options(Ncpus = min(parallel::detectCores() / 2, 120),
-          repos = c(CRAN = "https://cloud.r-project.org",
-                    PE = "https://PredictiveEcology.r-universe.dev"))
+  options(
+    Ncpus = min(parallel::detectCores() / 2, 120),
+    repos = c(
+      PE = "https://PredictiveEcology.r-universe.dev",
+      CRAN = "https://cloud.r-project.org"
+    ),
+    warnPartialMatchArgs = TRUE,
+    warnPartialMatchAttr = TRUE,
+    warnPartialMatchDollar = TRUE
+  )
 
   if (Sys.info()["sysname"] == "Linux" && grepl("Ubuntu", utils::osVersion)) {
     if (!grepl("R Under development", R.version.string)) {
