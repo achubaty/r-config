@@ -97,10 +97,23 @@ Alternatively, there are docker images that include RStudio server built-in, so 
 
 # 2. Using `rig`
 
-Using the R installation manager `rig` (<https://github.com/r-lib/rig>) is the easiest approach, as it automates the installation an linking of different R versions, and is cross-platfrom (works with Windows, macOS, and Linux).
+Using the R installation manager `rig` (<https://github.com/r-lib/rig>) is the easiest approach, as it automates the installation an linking of different R versions, and is cross-platform (works with Windows, macOS, and Linux).
 Although each version of R maintains separate package libraries, users should strive to use per-project package libraries, e.g., using [`renv`](https://rstudio.github.io/renv/).
 
-1. Install `rig` using the platform-specific installation instructions are provide at <https://github.com/r-lib/rig#id-installation>;
+1. Install `rig` using the platform-specific installation instructions are provide at <https://github.com/r-lib/rig#id-installation>.
+
+    E.g., on Ubuntu 20.04:
+      
+    ```bash
+    ## add apt repository
+    sudo curl -L https://rig.r-pkg.org/deb/rig.gpg -o /etc/apt/trusted.gpg.d/rig.gpg
+    sudo sh -c "echo 'deb [arch=amd64] http://rig.r-pkg.org/deb rig main' > \
+      /etc/apt/sources.list.d/rig.list"
+    
+    ## install (NB: rig is different package; use r-rig!)
+    sudo apt update
+    sudo apt install r-rig
+    ```
 
 2. Install the R versions you need:
 
@@ -115,7 +128,7 @@ Although each version of R maintains separate package libraries, users should st
     rig add 4.3
     ```
   
-    You can see the available versions (and the default, starred) by using `rig list`.
+    You can see the installed versions (and the default, starred) by using `rig list`.
     
     Set the default version using the names from `rig list`:
     
@@ -125,11 +138,11 @@ Although each version of R maintains separate package libraries, users should st
 
 3. Setup symlinks to allow easy launch of versioned R sessions:
 
-  ```bash
-  rig system make-links
-  ```
+    ```bash
+    rig system make-links
+    ```
   
-  Use e.g., `R-4.3-arm64` on macOS.
+    E.g., to launch R 4.2 on macOS, use `R-4.2-arm64`
 
 4. On macOS, restrict access to system package directories:
 
