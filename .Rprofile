@@ -84,7 +84,8 @@ if (interactive()) {
         ),
         version = "0.0.0.9000"
       ),
-      usethis.destdir = "~/GitHub"
+      usethis.destdir = "~/GitHub",
+      usethis.protocol = "ssh", ## use ssh git protocol
     )
   }
 }
