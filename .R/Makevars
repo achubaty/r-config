@@ -2,7 +2,7 @@
 
 VER=
 CCACHE=ccache
-CC=$(CCACHE) gcc$(VER) -std=gnu99
+CC=$(CCACHE) gcc$(VER)
 CXX=$(CCACHE) g++$(VER)
 C11=$(CCACHE) g++$(VER)
 C14=$(CCACHE) g++$(VER)
