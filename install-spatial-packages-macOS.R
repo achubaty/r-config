@@ -21,13 +21,15 @@ install.packages("s2") # type = "source")
 # file.symlink("/usr/local/opt/proj/lib/libproj.13.dylib",
 #              "/usr/local/opt/proj/lib/libproj.12.dylib")
 install.packages("sp", type = "source")
-install.packages("rgeos", type = "source")
-install.packages("rgdal", type = "source")
+install.packages("https://cran.r-project.org/src/contrib/Archive/rgeos/rgeos_0.6-4.tar.gz", type = "source", repos = NULL)
+install.packages("https://cran.r-project.org/src/contrib/Archive/rgdal/rgdal_1.6-7.tar.gz", type = "source", repos = NULL)
 install.packages("units", type = "source",
                  configure.args = c("--with-udunits2-lib=$(brew --prefix)/lib/",
                                     "--with-udunits2-include=$(brew --prefix)/include/")
 )
 install.packages("sf", type = "source", configure.args = "--with-proj-lib=$(brew --prefix)/lib/")
+install.packages("terra", type = "source")
+install.packages("raster", type = "source")
 
 ## additional packages that depend on previous
 install.packages("gdalUtils", type = "source")
