@@ -59,14 +59,6 @@ if (interactive()) {
       FALSE
     }
 
-  ## use rdoc package for pretty R help files when not in Rstudio
-  if (!isRstudio) {
-    if (!require("rdoc", character.only = TRUE, quietly = TRUE)) {
-      utils::install.packages("rdoc")
-    }
-    rdoc::use_rdoc()
-  }
-
   ## load devtools and set dev library
   if (isRstudio) {
     if (!require("devtools", character.only = TRUE, quietly = TRUE)) {
