@@ -43,7 +43,7 @@
         "hiddenTabSet": [],
         "console_left_on_top": false,
         "console_right_on_top": true,
-        "additional_source_columns": 0
+        "additional_source_columns": 1
     },
     "show_doc_outline_rmd": true,
     "spelling_dictionary_language": "en_CA",
@@ -62,5 +62,5 @@
     "auto_detect_indentation": true,
     "pdf_previewer": "none",
     "new_proj_git_init": true,
-    "source_with_echo": true
+    "view_dir_after_r_cmd_check": true
 }
