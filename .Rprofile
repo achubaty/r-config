@@ -74,7 +74,7 @@ if (interactive()) {
           role = c("aut", "cre"),
           comment = c(ORCID = "0000-0001-7146-8135")
         ),
-        version = "0.0.0.9000"
+        Version = "0.0.0.9000"
       ),
       usethis.destdir = "~/GitHub",
       usethis.protocol = "ssh" ## use ssh git protocol
