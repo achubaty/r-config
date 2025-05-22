@@ -1,6 +1,6 @@
 {
-    "load_workspace": false,
     "save_workspace": "never",
+    "load_workspace": false,
     "remove_history_duplicates": true,
     "highlight_selected_line": true,
     "margin_column": 100,
@@ -13,9 +13,8 @@
     "style_diagnostics": true,
     "code_completion": "manual",
     "font_size_points": 12,
-    "spelling_dictionary_language": "en_CA",
-    "posix_terminal_shell": "bash",
     "editor_theme": "Cobalt",
+    "posix_terminal_shell": "bash",
     "panes": {
         "quadrants": [
             "Source",
@@ -61,6 +60,12 @@
     ],
     "auto_detect_indentation": true,
     "pdf_previewer": "none",
-    "new_proj_git_init": true,
-    "view_dir_after_r_cmd_check": true
+    "default_encoding": "UTF-8",
+    "git_signed_commits": true,
+    "show_hidden_files": true,
+    "view_dir_after_r_cmd_check": true,
+    "code_formatter_styler_strict": false,
+    "reformat_on_save": true,
+    "code_formatter": "styler",
+    "console_highlight_conditions": "errors_warnings"
 }
