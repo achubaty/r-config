@@ -65,7 +65,9 @@
     "show_hidden_files": true,
     "view_dir_after_r_cmd_check": true,
     "code_formatter_styler_strict": false,
+    "code_formatter": "external",
+    "console_highlight_conditions": "errors_warnings",
+    "rmd_viewer_type": "none",
     "reformat_on_save": true,
-    "code_formatter": "styler",
-    "console_highlight_conditions": "errors_warnings"
+    "code_formatter_external_command": "air format"
 }
