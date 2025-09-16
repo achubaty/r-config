@@ -69,5 +69,6 @@
     "console_highlight_conditions": "errors_warnings",
     "rmd_viewer_type": "none",
     "reformat_on_save": true,
-    "code_formatter_external_command": "air format"
+    "code_formatter_external_command": "air format",
+    "enable_splash_screen": false
 }
