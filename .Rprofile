@@ -59,12 +59,17 @@ if (interactive()) {
       FALSE
     }
 
-  ## load devtools and set dev library
+  ## load devel packages and set devel library
   if (isRstudio) {
-    if (!require("devtools", character.only = TRUE, quietly = TRUE)) {
-      utils::install.packages("devtools")
-    }
-    suppressMessages(require(devtools))
+    local({
+      pkgs <- c("cli", "glue", "devtools", "purrr", "usethis", "withr") |>
+        vapply(require, character.only = TRUE, quietly = TRUE, FUN.VALUE = logical(1))
+
+      if (any(!pkgs)) {
+        utils::install.packages(names(pkgs[!pkgs]))
+      }
+    })
+
     options(
       usethis.full_name = "Alex Chubaty",
       usethis.description = list(
@@ -79,5 +84,7 @@ if (interactive()) {
       usethis.destdir = "~/GitHub",
       usethis.protocol = "ssh" ## use ssh git protocol
     )
+
+    cli::cli_alert_info("NOTE: for package development, use: {.run withr::local_libpaths('{(.Library.dev)}')}")
   }
 }
