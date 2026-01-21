@@ -6,6 +6,6 @@ line-ending = "auto"
 persistent-line-breaks = false
 exclude = []
 default-exclude = true
-skip = ["createsOutput", "defineModule", "defineParameter", "expectsInput", "globalVariables"]
+skip = ["createsOutput", "defineModule", "defineParameter", "expectsInput", "globalVariables", "use"]
 table = []
 default-table = true
